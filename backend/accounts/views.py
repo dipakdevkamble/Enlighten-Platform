@@ -191,23 +191,33 @@ class OAuthStartAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, provider: str):
-        cfg = _provider_config(provider)
-        if not cfg.get("client_id") or not cfg.get("client_secret"):
-            raise ValidationError(f"{provider.capitalize()} OAuth is not configured.")
-
-        next_url = request.query_params.get("next") or settings.FRONTEND_OAUTH_REDIRECT_URL
-        state = _build_oauth_state(provider, next_url)
-        params = {
-            "client_id": cfg["client_id"],
-            "redirect_uri": _redirect_uri(provider),
-            "scope": cfg["scope"],
-            "state": state,
-        }
         if provider == "google":
+            cfg = _provider_config("google")
+            if not cfg.get("client_id") or not cfg.get("client_secret"):
+                raise ValidationError("Google OAuth is not configured.")
+            params = {
+                "client_id": cfg["client_id"],
+                "redirect_uri": _redirect_uri("google"),
+                "scope": cfg["scope"],
+                "state": _build_oauth_state("google", settings.FRONTEND_OAUTH_REDIRECT_URL),
+            }
             params["response_type"] = "code"
             params["prompt"] = "consent"
+            return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?{urlencode(params)}")
 
-        return redirect(f"{cfg['auth_url']}?{urlencode(params)}")
+        if provider == "github":
+            cfg = _provider_config("github")
+            if not cfg.get("client_id") or not cfg.get("client_secret"):
+                raise ValidationError("GitHub OAuth is not configured.")
+            params = {
+                "client_id": cfg["client_id"],
+                "redirect_uri": _redirect_uri("github"),
+                "scope": cfg["scope"],
+                "state": _build_oauth_state("github", settings.FRONTEND_OAUTH_REDIRECT_URL),
+            }
+            return redirect(f"https://github.com/login/oauth/authorize?{urlencode(params)}")
+
+        raise ValidationError("Unsupported OAuth provider.")
 
 
 class OAuthCallbackAPIView(APIView):
@@ -240,10 +250,9 @@ class OAuthCallbackAPIView(APIView):
             user.save(update_fields=["password"])
 
         tokens = _auth_response(user)
-        redirect_target = state_data.get("next") or settings.FRONTEND_OAUTH_REDIRECT_URL
+        redirect_target = settings.FRONTEND_OAUTH_REDIRECT_URL
         params = urlencode(
             {
-                "provider": provider,
                 "access": tokens["access"],
                 "refresh": tokens["refresh"],
                 "email": user.email,

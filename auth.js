@@ -1,6 +1,7 @@
 (function () {
   const API_BASE_URL = (window.ENLIGHTEN_API_BASE_URL || "http://localhost:8000").replace(/\/$/, "");
   const OAUTH_REDIRECT_TARGET = window.location.origin + "/auth.html";
+  const ALLOWED_SOCIAL_PROVIDERS = new Set(["google", "github"]);
 
   function setTokenStorage(data) {
     if (data.access) localStorage.setItem("enlightenAccessToken", data.access);
@@ -44,9 +45,9 @@
     socialButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const provider = button.getAttribute("data-social-provider");
-        if (!provider) return;
+        if (!provider || !ALLOWED_SOCIAL_PROVIDERS.has(provider)) return;
         const oauthStartUrl = getApiUrl(`/api/auth/oauth/${provider}/start/?next=${encodeURIComponent(OAUTH_REDIRECT_TARGET)}`);
-        window.location.href = oauthStartUrl;
+        window.location.assign(oauthStartUrl);
       });
     });
 
