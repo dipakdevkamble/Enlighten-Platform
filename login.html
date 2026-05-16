@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <main class="auth login-page">
+    <section class="auth-card auth-card--compact" aria-label="Login">
+      <header class="auth-head">
+        
+        
+        <h1>Welcome Back</h1>
+        <p class="sub">Login to continue</p>
+      </header>
+
+      <form class="auth-form" data-auth-form="login" novalidate>
+        <div class="field">
+          <span>Email</span>
+          <div class="input-wrap">
+            <input id="email" name="email" type="email" placeholder="Enter your email" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <span>Password</span>
+          <div class="input-wrap">
+            <input id="password" name="password" type="password" placeholder="Enter your password" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="check">
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <a class="link" href="signup.html">Forgot password?</a>
+        </div>
+
+        <p class="form-message" role="status" aria-live="polite"></p>
+
+        <button class="btn primary" type="submit">Login</button>
+
+        <p class="foot">Don't have an account? <a class="link" href="signup.html">Create one</a></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="auth.js" defer></script>
+</body>
+</html>

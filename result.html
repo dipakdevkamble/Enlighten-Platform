@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Test Result</title>
+  <style>
+    :root{
+      --bg:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e5e7eb;
+      --primary:#3f4cff;
+      --primary2:#4f46e5;
+      --shadow:0 18px 50px rgba(15,23,42,.12);
+      --radius:22px;
+      --ok:#16a34a;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    /* Navbar */
+    .nav{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(229,231,235,.8);
+    }
+    .navInner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.4px}
+    .brandMark{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 10px 20px rgba(79,70,229,.25);
+    }
+    .navLinks{display:flex;gap:28px;color:#334155;font-weight:600}
+    .navLinks a{color:inherit;text-decoration:none}
+    .navLinks a:hover{color:var(--text)}
+    .navBtn{
+      border:0; cursor:pointer;
+      padding:12px 22px;
+      border-radius:14px;
+      font-weight:800;
+      color:#fff;
+      text-decoration:none;
+      background:linear-gradient(180deg,var(--primary),var(--primary2));
+      box-shadow:0 14px 25px rgba(63,76,255,.18);
+    }
+
+    .container{max-width:1200px;margin:0 auto;padding:26px 18px 60px}
+    .card{
+      margin-top:18px;
+      border:1px solid rgba(229,231,235,.9);
+      background:#fff;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:32px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:start;
+    }
+    @media (max-width:920px){ .card{grid-template-columns:1fr} }
+
+    .title{
+      margin:0 0 10px;
+      font-size:clamp(34px,4.2vw,54px);
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    .title .accent{color:var(--primary2)}
+    .desc{margin:0 0 18px;color:var(--muted);line-height:1.55;max-width:56ch;font-weight:500}
+
+    .formCard, .resultCard{
+      border:1px solid rgba(229,231,235,.9);
+      border-radius:18px;
+      padding:18px;
+      background:#fff;
+    }
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:560px){ .grid{grid-template-columns:1fr} }
+
+    label{display:block;font-size:12px;color:#475569;font-weight:700;margin:0 0 6px}
+    input, select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      outline:none;
+      font-size:14px;
+      background:#fff;
+    }
+    input:focus, select:focus{
+      border-color:rgba(79,70,229,.65);
+      box-shadow:0 0 0 4px rgba(79,70,229,.10);
+    }
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 16px;
+      font-weight:800;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+    }
+    .btnPrimary{
+      border:0;color:#fff;
+      background:linear-gradient(180deg,var(--primary),var(--primary2));
+      box-shadow:0 12px 22px rgba(63,76,255,.18);
+    }
+
+    .hintRow{
+      margin-top:10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .error, .info{
+      margin-top:12px;
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .error{
+      border:1px solid rgba(239,68,68,.35);
+      background:rgba(239,68,68,.08);
+      color:#991b1b;
+    }
+    .info{
+      border:1px solid rgba(59,130,246,.25);
+      background:rgba(59,130,246,.08);
+      color:#1e3a8a;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      border:1px solid rgba(229,231,235,.9);
+      background:#f8fafc;
+    }
+    .pill.ok{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.22);color:#166534}
+    .pill.bad{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#991b1b}
+
+    .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    .kvItem{border:1px solid rgba(229,231,235,.9);border-radius:16px;padding:12px}
+    .k{color:var(--muted);font-size:12px;font-weight:800;margin-bottom:6px}
+    .v{font-size:16px;font-weight:900}
+    .big{font-size:28px;letter-spacing:-.4px}
+    .empty{color:var(--muted);font-weight:700;font-size:13px;line-height:1.45}
+
+    @media print{
+      .nav, .actions, .hintRow, .error, .info { display:none !important; }
+      .container{padding:0}
+      .card{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="navInner">
+      <div class="brand">
+        <div class="brandMark" aria-hidden="true"></div>
+        <span>NLIGHTEN</span>
+      </div>
+      <nav class="navLinks" aria-label="Top navigation">
+        <a href="index.html">Home</a>
+        <a href="Notes.html">Notes</a>
+        <a href="Papers.html">Papers</a>
+        <a href="Lectures.html">Lectures</a>
+        <a href="About.html">About</a>
+      </nav>
+      <a class="navBtn" href="login.html">Login</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <!-- Left -->
+      <div>
+        <h1 class="title">Class Test <span class="accent">Result</span></h1>
+        <p class="desc">
+          Enter your <strong>Name</strong> and <strong>Roll No</strong> to view your marks.
+          (Marks should be fetched from a secure server, not stored in this HTML file.)
+        </p>
+
+        <div class="formCard">
+          <div class="grid">
+            <div>
+              <label for="name">Student Name</label>
+              <input id="name" type="text" placeholder="Enter your name" autocomplete="name" />
+            </div>
+            <div>
+              <label for="roll">Roll No</label>
+              <input id="roll" type="text" placeholder="e.g., 21" />
+            </div>
+            <div>
+              <label for="subject">Subject</label>
+              <select id="subject">
+                <option value="">Select subject</option>
+                <option>Mathematics</option>
+                <option>Science</option>
+                <option>English</option>
+                <option>Computer</option>
+                <option>Social Studies</option>
+              </select>
+            </div>
+            <div>
+              <label for="test">Test</label>
+              <select id="test">
+                <option value="Class Test 1">Class Test 1</option>
+                <option value="Class Test 2">Class Test 2</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btnPrimary" id="btnFind" type="button">Get Result</button>
+            <button class="btn" id="btnReset" type="button">Reset</button>
+            <button class="btn" id="btnPrint" type="button">Print</button>
+          </div>
+
+          <div class="hintRow">
+            <div id="today"></div>
+            <div class="pill" id="dbPill">Secure API</div>
+          </div>
+
+          <div class="error" id="errorBox"></div>
+          <div class="info" id="infoBox"></div>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="resultCard">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;">
+          <div>
+            <div class="k">Result Preview</div>
+            <div class="v">Marks will show after search</div>
+          </div>
+          <div class="pill" id="statusPill">Not Searched</div>
+        </div>
+
+        <div id="emptyMsg" class="empty" style="margin-top:10px;">
+          Fill the form and click <strong>Get Result</strong>.
+        </div>
+
+        <div class="kv" id="resultKv" style="display:none;">
+          <div class="kvItem">
+            <div class="k">Student Name</div>
+            <div class="v" id="outName">—</div>
+          </div>
+          <div class="kvItem">
+            <div class="k">Roll No</div>
+            <div class="v" id="outRoll">—</div>
+          </div>
+          <div class="kvItem">
+            <div class="k">Subject</div>
+            <div class="v" id="outSubject">—</div>
+          </div>
+          <div class="kvItem">
+            <div class="k">Test</div>
+            <div class="v" id="outTest">—</div>
+          </div>
+          <div class="kvItem" style="grid-column:1 / -1;">
+            <div class="k">Marks</div>
+            <div class="v big" id="outMarks">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const el = (id) => document.getElementById(id);
+
+    // YYYY-MM-DD
+    (function(){
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const dd = String(d.getDate()).padStart(2,'0');
+      el('today').textContent = `Date: ${yyyy}-${mm}-${dd}`;
+    })();
+
+    const RESULT_API_URL = "/api/results";
+
+    function normalize(s){ return String(s || "").trim().toLowerCase(); }
+
+    function showError(msg){
+      el('errorBox').style.display = 'block';
+      el('errorBox').textContent = msg;
+    }
+    function clearError(){
+      el('errorBox').style.display = 'none';
+      el('errorBox').textContent = '';
+    }
+    function showInfo(msg){
+      el('infoBox').style.display = 'block';
+      el('infoBox').textContent = msg;
+    }
+    function clearInfo(){
+      el('infoBox').style.display = 'none';
+      el('infoBox').textContent = '';
+    }
+
+    function setStatus(type, text){
+      const pill = el('statusPill');
+      pill.classList.remove('ok','bad');
+      pill.textContent = text;
+
+      if (type === 'ok') pill.classList.add('ok');
+      if (type === 'bad') pill.classList.add('bad');
+    }
+
+    function validate(){
+      const name = el('name').value.trim();
+      const roll = el('roll').value.trim();
+      const subject = el('subject').value.trim();
+      const test = el('test').value.trim();
+
+      if (!name) throw new Error('Please enter Student Name.');
+      if (!roll) throw new Error('Please enter Roll No.');
+      if (!/^[0-9A-Za-z-]+$/.test(roll)) throw new Error('Roll No should contain only letters/numbers (and -).');
+      if (!subject) throw new Error('Please select a Subject.');
+
+      return { name, roll, subject, test };
+    }
+
+    async function findResult(input){
+      const response = await fetch(RESULT_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input),
+      });
+
+      if (!response.ok) {
+        throw new Error("Result service is not available yet. Connect /api/results on your server before publishing real marks.");
+      }
+
+      return response.json();
+    }
+
+    function render(result, input){
+      el('outName').textContent = result.name;
+      el('outRoll').textContent = result.rollNo;
+      el('outSubject').textContent = result.subject;
+      el('outTest').textContent = result.test;
+      el('outMarks').textContent = result.marks;
+
+      el('emptyMsg').style.display = 'none';
+      el('resultKv').style.display = 'grid';
+
+      setStatus('ok', 'Result Found');
+      clearInfo();
+
+      // If name differs, show small note (optional)
+      if (normalize(result.name) !== normalize(input.name)) {
+        showInfo(`Note: Name matched by roll no. Stored name: "${result.name}".`);
+      }
+    }
+
+    function clearResultUI(){
+      el('resultKv').style.display = 'none';
+      el('emptyMsg').style.display = 'block';
+      setStatus(null, 'Not Searched');
+    }
+
+    el('btnFind').addEventListener('click', async () => {
+      clearError(); clearInfo();
+      try{
+        const input = validate();
+        const res = await findResult(input);
+
+        if (!res){
+          clearResultUI();
+          setStatus('bad', 'Result Not Found');
+          showError('Result not found. Please check Name / Roll No / Subject / Test.');
+          return;
+        }
+
+        render(res, input);
+      } catch(e){
+        clearResultUI();
+        setStatus('bad', 'Invalid Input');
+        showError(e.message || 'Invalid input.');
+      }
+    });
+
+    el('btnReset').addEventListener('click', () => {
+      clearError(); clearInfo();
+      el('name').value = '';
+      el('roll').value = '';
+      el('subject').value = '';
+      el('test').value = 'Class Test 1';
+      clearResultUI();
+    });
+
+    el('btnPrint').addEventListener('click', () => {
+      if (el('resultKv').style.display !== 'grid') {
+        showError('Please get the result first, then print.');
+        return;
+      }
+      clearError(); clearInfo();
+      window.print();
+    });
+  </script>
+</body>
+</html>

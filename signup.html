@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Enlighten</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="auth.js" defer></script>
+</head>
+<body>
+
+    <main class="auth-card">
+        <header class="auth-head">
+            
+            <div class="brand-logo" style="margin: 0 auto 1rem;">
+                <i data-lucide="shield-check" style="width: 40px; height: 40px; color: var(--primary);"></i>
+            </div>
+            <h1>Create an account</h1>
+            <p class="sub">Create account and start learning</p>
+        </header>
+
+        <form class="auth-form" data-auth-form="signup" novalidate>
+            
+            <div class="grid2">
+                <div class="field">
+                    <label for="first-name">First Name</label>
+                    <div class="input-wrap">
+                        <i data-lucide="user" size="18"></i>
+                        <input type="text" id="first-name" name="firstName" placeholder="First name" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="last-name">Last Name</label>
+                    <div class="input-wrap">
+                        <input type="text" id="last-name" name="lastName" placeholder="Last name" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="field">
+                <label for="email">Email Address</label>
+                <div class="input-wrap">
+                    <i data-lucide="mail" size="18"></i>
+                    <input type="email" id="email" name="email" placeholder="abc@gmail.com" required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field">
+                <label for="password">Password</label>
+                <div class="input-wrap">
+                    <i data-lucide="lock" size="18"></i>
+                    <input type="password" id="password" name="password" placeholder="••••••••" minlength="8" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-wrap">
+                    <i data-lucide="lock-keyhole" size="18"></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" minlength="8" required>
+                </div>
+            </div>
+
+           
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <label class="check">
+                    <input type="checkbox">
+                    <span>Remember me</span>
+                </label>
+                <a href="login.html" class="link" style="font-size: 0.85rem;">Forgot password?</a>
+            </div>
+
+            <p class="form-message" role="status" aria-live="polite"></p>
+            
+            
+            <button type="submit" class="btn primary">Get Started</button>
+            
+            <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin: 8px 0;">
+                or continue with
+            </div>
+
+            <button type="button" class="btn ghost">
+                <i data-lucide="chrome" size="18" style="margin-right: 8px;"></i>
+                Continue with Google
+            </button>
+        </form>
+
+        <footer style="margin-top: 32px; text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+            Already have an account? <a href="login.html" class="link">Log in</a>
+        </footer>
+    </main>
+
+    
+</body>
+</html>

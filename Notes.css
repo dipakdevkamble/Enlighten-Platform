@@ -1,0 +1,324 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-container {
+  display: flex;
+  width: 100vw;
+}
+
+/* Main Sidebar Container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 100vh;
+  /* Deep Slate Gradient for a premium look */
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #cbd5e1;
+  /* Removed border-right, used shadow for cleaner separation */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  padding: 25px 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-y: auto; /* Allows internal scrolling */
+  z-index: 1000;
+}
+
+/* Custom Scrollbar for the Sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+/* Dashboard Heading */
+.sidebar-header h2 {
+  font-size: 1.4rem;
+  color: #f8fafc;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #38bdf8;
+  padding-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+/* Year Names (Headlines) */
+.sidebar-section h3 {
+  font-size: 0.85rem;
+  color: #94a3b8; /* Muted color for better hierarchy */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 25px 0 12px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.sidebar-section h3:hover {
+  color: #f8fafc; /* Glows slightly when hovered */
+}
+
+/* Accordion Logic */
+.sidebar-section ul {
+  list-style: none;
+  padding-left: 0; /* Align with heading for modern look */
+  display: none;
+}
+
+.sidebar-section.open ul {
+  display: block;
+}
+
+.sidebar-section h3::after {
+  content: '▸';
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-section.open h3::after {
+  content: '▾';
+  color: #38bdf8;
+}
+
+/* Sidebar List Items */
+.sidebar-section li {
+  margin-bottom: 5px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-section li a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #94a3b8; /* Default link color */
+  display: block;
+  width: 100%;
+  font-size: 0.9rem;
+  transition: inherit;
+}
+
+/* Interaction Effects */
+.sidebar-section li:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Glass effect */
+  padding-left: 8px; /* Smooth slide right */
+}
+
+.sidebar-section li:hover a {
+  color: #38bdf8; /* Link text turns blue on hover */
+}
+
+/* Active State */
+.sidebar-section li.active {
+  background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+}
+
+.sidebar-section li.active a {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Main Content Styling */
+.main-content {
+  margin-left: 270px; /* matches sidebar width */
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background-color: #f1f5f9;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h3 {
+  margin-bottom: 22px;
+  color: #444;
+  font-size: 22px;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #cbd5e1;
+  margin: 80px auto;
+  width: 95%;
+  border-radius: 50px;
+}
+
+/* Grid Layout */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 20px;
+}
+
+/* Card Design */
+.card {
+  background: #fff;
+  border: 1.5px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Card Image Area (Placeholder) */
+.card-img {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  font-size: 24px;
+  color: #ccc;
+  font-weight: bold;
+}
+
+/* Card Bottom Info Area */
+.card-info {
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+
+.card-info p {
+  font-weight: normal;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Color Themes */
+.theme-blue { border-color: #b3d7ff; }
+.theme-blue .card-info { background-color: #e7f1ff; }
+
+.theme-green { border-color: #c8e6c9; }
+.theme-green .card-info { background-color: #e8f5e9; }
+
+.theme-purple { border-color: #d1c4e9; }
+.theme-purple .card-info { background-color: #f3e5f5; }
+
+.theme-orange { border-color: #ffe0b2; }
+.theme-orange .card-info { background-color: #fff3e0; }
+
+/* --- SE Computer Themes (Teal/Cool tones) --- */
+.theme-teal { border-color: #4db6ac; }
+.theme-teal .card-info { background-color: #e0f2f1; }
+
+.theme-indigo { border-color: #7986cb; }
+.theme-indigo .card-info { background-color: #e8eaf6; }
+
+/* --- SE IT Themes (Amber/Warm tones) --- */
+.theme-amber { border-color: #ffb300; }
+.theme-amber .card-info { background-color: #fff8e1; }
+
+.theme-rose { border-color: #f06292; }
+.theme-rose .card-info { background-color: #fce4ec; }
+
+/* --- SE AIDS Themes (Darker Professional tones) --- */
+.theme-slate { border-color: #90a4ae; }
+.theme-slate .card-info { background-color: #eceff1; }
+
+/* responsive */
+/* --- Mobile Phone Optimization --- */
+@media (max-width: 550px) {
+  /* 1. Stack sidebar on top of main content */
+  .dashboard-container {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  /* 2. Sidebar becomes a compact top-nav */
+  .sidebar {
+    position: static; /* IMPORTANT: stop fixed overlay on mobile */
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-right: none;
+    border-bottom: 2px solid #eee;
+    background: #fff; /* keep your mobile preference */
+    color: #111827;
+    box-shadow: none;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 14px;
+    color: #111827;
+    border-bottom: 2px solid #38bdf8;
+  }
+
+  /* Lists horizontal and scrollable */
+  .sidebar-section ul {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .sidebar-section li {
+    margin-bottom: 0;
+    padding-left: 0; /* avoid hover shift issues on mobile */
+    background: #f1f1f1;
+    border-radius: 20px;
+  }
+
+  .sidebar-section li a {
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #111827;
+  }
+
+  .sidebar-section h3 {
+    color: #111827;
+  }
+
+  /* 3. Main Content adjustments */
+  .main-content {
+    margin-left: 0; /* IMPORTANT: remove desktop offset */
+    padding: 20px 15px;
+  }
+
+  .main-content h1 { font-size: 20px; text-align: center; }
+
+  /* 4. One large card per row */
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  /* 5. Adjust Card height and text for readability */
+  .card { min-height: 180px; }
+
+  .card-img { height: 100px; }
+
+  .card-info { font-size: 15px; }
+}

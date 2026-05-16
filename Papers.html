@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Question Paper Archive</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="Papers.css" />
+</head>
+
+<body>
+  <header>
+    <h1>PaperArchive</h1>
+    <div class="search-bar">
+      <input id="searchInput" type="text" placeholder="Search subjects..." aria-label="Search subjects" />
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar Departments -->
+    <nav class="sidebar">
+      <h3>Departments</h3>
+      <ul class="dept-list" role="list">
+        <li class="dept-item active" data-dept="fy">First Year</li>
+        <li class="dept-item" data-dept="ce">SE: Computer Engineering</li>
+        <li class="dept-item" data-dept="it">SE: IT Engineering</li>
+        <li class="dept-item" data-dept="adis">SE: AIDS Engineering</li>
+        <li class="dept-item" data-dept="etc">SE: E &amp; TC Engineering</li>
+        <li class="dept-item" data-dept="civil">SE: Civil Engineering</li>
+        
+      </ul>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+      <nav class="breadcrumbs" id="breadcrumbs">Home &gt; First Year</nav>
+      <h2 id="pageTitle">First Year Subjects</h2>
+
+      <!-- ===================== -->
+      <!-- Department: First Year -->
+      <!-- ===================== -->
+      <section class="dept-panel active" data-dept-panel="fy">
+        <div class="hierarchy-container">
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Basic Electrical Engineering</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/May_Jun_2022.pdf" target="_blank" rel="noopener noreferrer">May_Jun_2022.pdf</a>
+                    <a href="papers/May_Jun_2022.pdf" class="download-btn" >Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/May_Jun_2023.pdf" target="_blank" rel="noopener noreferrer">May_Jun_2023.pdf</a>
+                    <a href="papers/May_Jun_2023.pdf" class="download-btn">Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/May_Jun_2024.pdf" target="_blank" rel="noopener noreferrer">May_Jun_2024.pdf</a>
+                    <a href="papers/May_Jun_2024.pdf" class="download-btn" >Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/May_Jun_2025.pdf" target="_blank" rel="noopener noreferrer">May_Jun_2025.pdf</a>
+                    <a href="papers/May_Jun_2025.pdf" class="download-btn" >Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/Nov_Dec_2019.pdf" target="_blank" rel="noopener noreferrer">Nov_Dec_2019.pdf</a>
+                    <a href="papers/Nov_Dec_2019.pdf" class="download-btn" >Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/Nov_Dec_2024.pdf" target="_blank" rel="noopener noreferrer">Nov_Dec_2024.pdf</a>
+                    <a href="papers/Nov_Dec_2024.pdf" class="download-btn" >Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/Nov_Dec_2025.pdf" target="_blank" rel="noopener noreferrer">Nov_Dec_2025.pdf</a>
+                    <a href="papers/Nov_Dec_2025.pdf" class="download-btn" >Download</a>
+                </div>
+            </div>
+          
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Basic Electronics Engineering</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_May_Jun_2022.pdf" target="_blank" rel="noopener noreferrer">BXE_May_Jun_2022.pdf</a>
+                    <a href="papers/BXE_May_Jun_2022.pdf" class="download-btn" download>Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_May_Jun_2023.pdf" target="_blank" rel="noopener noreferrer">BXE_May_Jun_2023.pdf</a>
+                    <a href="papers/BXE_May_Jun_2023.pdf" class="download-btn" download>Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_May_Jun_2025.pdf" target="_blank" rel="noopener noreferrer">BXE_May_Jun_2025.pdf</a>
+                    <a href="papers/BXE_May_Jun_2025.pdf" class="download-btn" download>Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_Nov_Dec_2023.pdf" target="_blank" rel="noopener noreferrer">BXE_Nov_Dec_2023.pdf</a>
+                    <a href="papers/BXE_Nov_Dec_2023.pdf" class="download-btn" download>Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_Nov_Dec_2024.pdf" target="_blank" rel="noopener noreferrer">BXE_Nov_Dec_2024.pdf</a>
+                    <a href="papers/BXE_Nov_Dec_2024.pdf" class="download-btn" download>Download</a>
+                </div>
+                <div class="pdf-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <a class="file-name" href="papers/BXE_Nov_Dec_2025.pdf" target="_blank" rel="noopener noreferrer">BXE_Nov_Dec_2025.pdf</a>
+                    <a href="papers/BXE_Nov_Dec_2025.pdf" class="download-btn" download>Download</a>
+                </div>
+            </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Chemistry</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Chemistry_May_Jun_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Graphics</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Graphics_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Mathematics - I</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Maths1_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Maths1_Nov_Dec_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Mathematics - II</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Maths2_May_Jun_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Mechanics</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Mechanics_Nov_Dec_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Engineering Physics</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Physics_May_Jun_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Programming &amp; Problem Solving</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">PPS_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+              <i class="fa-solid fa-folder"></i>
+              <span>Systems in Mechanical Engineering</span>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+              <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">SME_Nov_Dec_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================== -->
+        <!-- Department: Computer Engineering -->
+        <!-- ============================== -->
+        <section class="dept-panel" data-dept-panel="ce">
+            <div class="hierarchy-container">
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Computer Graphics</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">CG_March_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Data Structures &amp; Algorithms</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">DSA_March_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">DSA_Nov_2023.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Digital Electronics &amp; Logic Design</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">DELD_May_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Discrete Mathematics</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">DM_Nov_2023.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Engineering Mathematics III</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">Math3_March_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Fundamentals of Data Structures</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">FDS_May_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Microprocessor</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">Microprocessor_Nov_2023.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Object Oriented Programming</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">OOP_March_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Principles of Communication Systems</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">PCS_May_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Principles of Programming Languages</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">PPL_Nov_2023.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Software Engineering</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">SE_March_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-group">
+                    <button class="subject-header" type="button" aria-expanded="false">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Statistics</span>
+                        <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="pdf-list" hidden>
+                        <div class="pdf-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="file-name">Statistics_May_2024.pdf</span>
+                        <a href="#" class="download-btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================== -->
+        <!-- Department: IT -->
+        <!-- ===================== -->
+        <section class="dept-panel" data-dept-panel="it">
+        <div class="hierarchy-container">
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Basics of Computer Network</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">BCN_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Computer Graphics</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">CG_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Data Structures &amp; Algorithms</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DSA_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Database Management System</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DBMS_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Discrete Mathematics</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DM_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Engineering Mathematics III</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Math3_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Logic Design &amp; Computer Organization</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">LDCO_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Object Oriented Programming</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">OOP_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Processor Architecture</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">PA_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Software Engineering</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">SE_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        </section>
+
+      <!-- ===================== -->
+        <!-- Department: ADIS (was Civil) -->
+        <!-- ===================== -->
+        <section class="dept-panel" data-dept-panel="adis">
+        <div class="hierarchy-container">
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Computer Graphics</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">CG_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Data Structures &amp; Algorithms</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DSA_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Discrete Mathematics</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DM_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Fundamentals of Data Structures</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">FDS_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Internet of Things</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">IoT_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Management Information System</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">MIS_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Object Oriented Programming</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">OOP_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Operating Systems</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">OS_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Software Engineering</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">SE_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Statistics</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Statistics_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        </section>
+      <!-- ===================== -->
+        <!-- Department: E&TC -->
+        <!-- ===================== -->
+        <section class="dept-panel" data-dept-panel="etc">
+        <div class="hierarchy-container">
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Control System</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">CS_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Data Structures</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DS_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Data Structures &amp; Algorithms</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DSA_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Digital Circuits</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">DigitalCircuits_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Electrical Circuits</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">ElectricalCircuits_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Electronic Circuits</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">ElectronicCircuits_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Engineering Mathematics III</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">Math3_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Object Oriented Programming</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">OOP_Nov_2023.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Principles of Communication Systems</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">PCS_May_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="subject-group">
+            <button class="subject-header" type="button" aria-expanded="false">
+                <i class="fa-solid fa-folder"></i>
+                <span>Signals &amp; Systems</span>
+                <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </button>
+            <div class="pdf-list" hidden>
+                <div class="pdf-item">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span class="file-name">SignalsSystems_March_2024.pdf</span>
+                <a href="#" class="download-btn">Download</a>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        </section>
+
+        <section class="dept-panel" data-dept-panel="civil">
+          <div class="dept-card">
+            <h2>Civil Engineering Papers</h2>
+            <p class="empty-state">Civil Engineering papers are coming soon.</p>
+          </div>
+        </section>
+
+    </main>
+  </div>
+
+<script src="Papers.js"></script>
+</body>
+</html>
