@@ -1,0 +1,65 @@
+{% load static socialaccount %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'auth/css/login1.css' %}" />
+</head>
+<body>
+  <main class="auth login-page">
+    <section class="auth-card auth-card--compact" aria-label="Login">
+      <header class="auth-head">
+        <h1>Welcome Back</h1>
+        <p class="sub">Login to continue</p>
+      </header>
+
+      {% if messages %}
+        {% for message in messages %}
+          <p class="form-message" {% if message.tags %}data-type="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+
+      {% if form.non_field_errors %}
+        <p class="form-message">{{ form.non_field_errors|striptags }}</p>
+      {% endif %}
+
+      <form class="auth-form" method="post" novalidate>
+        {% csrf_token %}
+        <div class="field">
+          <span>Email</span>
+          <div class="input-wrap">
+            <input id="id_username" name="username" type="email" placeholder="Enter your email" value="{{ form.username.value|default:'' }}" required />
+          </div>
+          {% if form.username.errors %}<p class="form-message">{{ form.username.errors|striptags }}</p>{% endif %}
+        </div>
+
+        <div class="field">
+          <span>Password</span>
+          <div class="input-wrap">
+            <input id="id_password" name="password" type="password" placeholder="Enter your password" required />
+          </div>
+          {% if form.password.errors %}<p class="form-message">{{ form.password.errors|striptags }}</p>{% endif %}
+        </div>
+
+        <div class="row">
+          <label class="check">
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <a class="link" href="{% url 'password_reset' %}">Forgot password?</a>
+        </div>
+
+        <button class="btn primary" type="submit">Login</button>
+        <a class="btn" style="border-color:#d6dcea; text-decoration:none; color:#0f172a;" href="{% provider_login_url 'google' process='login' %}">Continue with Google</a>
+        <a class="btn" style="border-color:#d6dcea; text-decoration:none; color:#0f172a;" href="{% provider_login_url 'github' process='login' %}">Continue with GitHub</a>
+        <p class="foot">Don't have an account? <a class="link" href="{% url 'signup' %}">Create one</a></p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

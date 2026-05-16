@@ -1,0 +1,114 @@
+{% load static socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Enlighten</title>
+    <link rel="stylesheet" href="{% static 'auth/css/signup1.css' %}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+    <main class="auth-card">
+        <header class="auth-head">
+            <div class="brand-logo" style="margin: 0 auto 1rem;">
+                <i data-lucide="shield-check" style="width: 40px; height: 40px; color: var(--primary);"></i>
+            </div>
+            <h1>Create an account</h1>
+            <p class="sub">Create account and start learning</p>
+        </header>
+
+        {% if messages %}
+          {% for message in messages %}
+            <p class="form-message" {% if message.tags %}data-type="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+          <p class="form-message">{{ form.non_field_errors|striptags }}</p>
+        {% endif %}
+
+        <form class="auth-form" method="post" novalidate>
+            {% csrf_token %}
+            <div class="grid2">
+                <div class="field">
+                    <label for="id_first_name">First Name</label>
+                    <div class="input-wrap">
+                        <i data-lucide="user" size="18"></i>
+                        <input type="text" id="id_first_name" name="first_name" placeholder="First name" value="{{ form.first_name.value|default:'' }}" required>
+                    </div>
+                    {% if form.first_name.errors %}<p class="form-message">{{ form.first_name.errors|striptags }}</p>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_last_name">Last Name</label>
+                    <div class="input-wrap">
+                        <input type="text" id="id_last_name" name="last_name" placeholder="Last name" value="{{ form.last_name.value|default:'' }}" required>
+                    </div>
+                    {% if form.last_name.errors %}<p class="form-message">{{ form.last_name.errors|striptags }}</p>{% endif %}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="id_email">Email Address</label>
+                <div class="input-wrap">
+                    <i data-lucide="mail" size="18"></i>
+                    <input type="email" id="id_email" name="email" placeholder="abc@gmail.com" value="{{ form.email.value|default:'' }}" required>
+                </div>
+                {% if form.email.errors %}<p class="form-message">{{ form.email.errors|striptags }}</p>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="id_password1">Password</label>
+                <div class="input-wrap">
+                    <i data-lucide="lock" size="18"></i>
+                    <input type="password" id="id_password1" name="password1" placeholder="••••••••" minlength="8" required>
+                </div>
+                {% if form.password1.errors %}<p class="form-message">{{ form.password1.errors|striptags }}</p>{% endif %}
+            </div>
+
+            <div class="field">
+                <label for="id_password2">Confirm Password</label>
+                <div class="input-wrap">
+                    <i data-lucide="lock-keyhole" size="18"></i>
+                    <input type="password" id="id_password2" name="password2" placeholder="••••••••" minlength="8" required>
+                </div>
+                {% if form.password2.errors %}<p class="form-message">{{ form.password2.errors|striptags }}</p>{% endif %}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                <label class="check">
+                    <input type="checkbox">
+                    <span>Remember me</span>
+                </label>
+                <a href="{% url 'password_reset' %}" class="link" style="font-size: 0.85rem;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn primary">Get Started</button>
+
+            <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin: 8px 0;">
+                or continue with
+            </div>
+
+            <a href="{% provider_login_url 'google' process='login' %}" class="btn ghost" style="text-decoration:none;">
+                <i data-lucide="chrome" size="18" style="margin-right: 8px;"></i>
+                Continue with Google
+            </a>
+            <a href="{% provider_login_url 'github' process='login' %}" class="btn ghost" style="text-decoration:none; margin-top:8px;">
+                Continue with GitHub
+            </a>
+        </form>
+
+        <footer style="margin-top: 32px; text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+            Already have an account? <a href="{% url 'login' %}" class="link">Log in</a>
+        </footer>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<p>Hi {{ user.first_name|default:user.username }},</p>
+<p>Please verify your Enlighten account by clicking the link below:</p>
+<p><a href="{{ verification_url }}">Verify my email</a></p>
+<p>If you didn't create this account, you can ignore this email.</p>
