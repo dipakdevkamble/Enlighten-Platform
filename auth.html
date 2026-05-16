@@ -3,10 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=signup.html">
-  <title>Redirecting | Enlighten</title>
+  <title>Authenticating | Enlighten</title>
 </head>
 <body>
-  <p>Redirecting to <a href="signup.html">Create Account</a>.</p>
+  <p>Completing sign-in...</p>
+  <script>
+    (function () {
+      const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+      const params = new URLSearchParams(hash);
+      const access = params.get("access");
+      const refresh = params.get("refresh");
+      const email = params.get("email");
+
+      if (access && refresh) {
+        localStorage.setItem("enlightenAccessToken", access);
+        localStorage.setItem("enlightenRefreshToken", refresh);
+        if (email) localStorage.setItem("enlightenUserEmail", email);
+        window.location.replace("index.html");
+        return;
+      }
+
+      window.location.replace("signup.html");
+    })();
+  </script>
 </body>
 </html>

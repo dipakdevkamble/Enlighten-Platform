@@ -14,8 +14,6 @@
   <main class="auth login-page">
     <section class="auth-card auth-card--compact" aria-label="Login">
       <header class="auth-head">
-        
-        
         <h1>Welcome Back</h1>
         <p class="sub">Login to continue</p>
       </header>
@@ -46,6 +44,12 @@
         <p class="form-message" role="status" aria-live="polite"></p>
 
         <button class="btn primary" type="submit">Login</button>
+
+        <div style="text-align: center; color: #a0a7bb; font-size: 0.85rem; margin: 10px 0;">
+          or continue with
+        </div>
+        <button type="button" class="btn" data-social-provider="google">Continue with Google</button>
+        <button type="button" class="btn" style="margin-top: 8px;" data-social-provider="github">Continue with GitHub</button>
 
         <p class="foot">Don't have an account? <a class="link" href="signup.html">Create one</a></p>
       </form>

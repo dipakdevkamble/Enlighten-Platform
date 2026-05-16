@@ -12,7 +12,6 @@
 
     <main class="auth-card">
         <header class="auth-head">
-            
             <div class="brand-logo" style="margin: 0 auto 1rem;">
                 <i data-lucide="shield-check" style="width: 40px; height: 40px; color: var(--primary);"></i>
             </div>
@@ -21,7 +20,6 @@
         </header>
 
         <form class="auth-form" data-auth-form="signup" novalidate>
-            
             <div class="grid2">
                 <div class="field">
                     <label for="first-name">First Name</label>
@@ -38,7 +36,6 @@
                 </div>
             </div>
 
-            <!-- Email -->
             <div class="field">
                 <label for="email">Email Address</label>
                 <div class="input-wrap">
@@ -47,7 +44,6 @@
                 </div>
             </div>
 
-            <!-- Password -->
             <div class="field">
                 <label for="password">Password</label>
                 <div class="input-wrap">
@@ -64,7 +60,6 @@
                 </div>
             </div>
 
-           
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
                 <label class="check">
                     <input type="checkbox">
@@ -74,17 +69,18 @@
             </div>
 
             <p class="form-message" role="status" aria-live="polite"></p>
-            
-            
             <button type="submit" class="btn primary">Get Started</button>
-            
+
             <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin: 8px 0;">
                 or continue with
             </div>
 
-            <button type="button" class="btn ghost">
+            <button type="button" class="btn ghost" data-social-provider="google">
                 <i data-lucide="chrome" size="18" style="margin-right: 8px;"></i>
                 Continue with Google
+            </button>
+            <button type="button" class="btn ghost" style="margin-top: 8px;" data-social-provider="github">
+                Continue with GitHub
             </button>
         </form>
 
@@ -93,6 +89,5 @@
         </footer>
     </main>
 
-    
 </body>
 </html>

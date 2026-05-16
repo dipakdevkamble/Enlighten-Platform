@@ -5,3 +5,8 @@ build/
 .next/
 .cache/
 .vscode/
+
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
