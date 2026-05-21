@@ -243,6 +243,10 @@ hr {
 .theme-slate { border-color: #90a4ae; }
 .theme-slate .card-info { background-color: #eceff1; }
 
+/* --- TE ENTC Themes (Red / Power Electronics) --- */
+.theme-red { border-color: #ef9a9a; }
+.theme-red .card-info { background-color: #ffebee; }
+
 /* responsive */
 /* --- Mobile Phone Optimization --- */
 @media (max-width: 550px) {

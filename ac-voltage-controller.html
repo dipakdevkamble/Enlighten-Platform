@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Single Phase Full-Wave AC Voltage Controller – R Load | Enlighten Platform</title>
+  <style>
+    /* ── Base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      line-height: 1.75;
+    }
+
+    /* ── Top bar ────────────────────────────────────────── */
+    .topbar {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: #e2e8f0;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .topbar a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .topbar a:hover { text-decoration: underline; }
+    .topbar .sep { color: #475569; }
+    .topbar .page-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    /* ── Layout wrapper ─────────────────────────────────── */
+    .wrapper {
+      max-width: 900px;
+      margin: 36px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* ── Hero heading ───────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      border-radius: 14px;
+      padding: 36px 36px 28px;
+      margin-bottom: 32px;
+      color: #f1f5f9;
+    }
+    .hero .subject-tag {
+      display: inline-block;
+      background: #38bdf8;
+      color: #0f172a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .hero .marks-badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: rgba(56,189,248,0.15);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      font-size: 0.8rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    /* ── Section card ───────────────────────────────────── */
+    .card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card h2 .num {
+      background: #0ea5e9;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e3a5f;
+      margin: 20px 0 8px;
+    }
+
+    /* ── ASCII diagram box ──────────────────────────────── */
+    .diagram-box {
+      background: #0f172a;
+      color: #a3e635;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      padding: 22px 24px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre;
+      margin: 14px 0 6px;
+      border: 1px solid #1e293b;
+    }
+
+    /* ── Waveform box ───────────────────────────────────── */
+    .wave-box {
+      background: #0f172a;
+      color: #67e8f9;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      padding: 20px 24px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre;
+      margin: 12px 0 6px;
+      border: 1px solid #1e293b;
+    }
+
+    /* ── Caption beneath diagrams ───────────────────────── */
+    .caption {
+      font-size: 0.78rem;
+      color: #64748b;
+      text-align: center;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    /* ── Lists ──────────────────────────────────────────── */
+    ul.bullet, ol.num {
+      padding-left: 22px;
+      margin: 8px 0;
+    }
+    ul.bullet li, ol.num li {
+      margin-bottom: 7px;
+      font-size: 0.95rem;
+    }
+    ul.bullet li strong, ol.num li strong {
+      color: #0f172a;
+    }
+
+    /* ── Key-point highlight box ────────────────────────── */
+    .highlight {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.93rem;
+    }
+    .highlight strong { color: #1d4ed8; }
+
+    /* ── Formula ────────────────────────────────────────── */
+    .formula {
+      background: #fefce8;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.93rem;
+      color: #78350f;
+      margin: 12px 0;
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* ── Table ──────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 14px 0;
+    }
+    .data-table th {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .data-table tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ── Memory tip ─────────────────────────────────────── */
+    .tip {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.92rem;
+    }
+    .tip strong { color: #15803d; }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .wrapper { padding: 0 12px; margin-top: 20px; }
+      .hero { padding: 24px 20px 18px; }
+      .hero h1 { font-size: 1.3rem; }
+      .card { padding: 20px 16px; }
+      .diagram-box, .wave-box { font-size: 0.72rem; padding: 14px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Top breadcrumb bar ─────────────────────────────────── -->
+<div class="topbar">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <a href="Notes.html">Notes</a>
+  <span class="sep">›</span>
+  <a href="Notes.html#te-entc-notes">TE ENTC</a>
+  <span class="sep">›</span>
+  <span class="page-title">AC Voltage Controller</span>
+</div>
+
+<!-- ── Main wrapper ───────────────────────────────────────── -->
+<div class="wrapper">
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="subject-tag">Power Electronics · TE ENTC</span>
+    <h1>Single Phase Full-Wave AC Voltage Controller<br>for Resistive (R) Load</h1>
+    <p>Complete exam-ready answer — circuit diagram, theory, waveforms, and memory tips.</p>
+    <span class="marks-badge">★ High-frequency exam topic · 6–7 marks</span>
+  </div>
+
+  <!-- ── 1. Circuit Diagram ─────────────────────────────── -->
+  <div class="card">
+    <h2><span class="num">1</span>Circuit Diagram</h2>
+
+    <p>The circuit uses <strong>two SCRs (T1 and T2) connected in anti-parallel</strong> across the AC supply and the load R.</p>
+
+    <div class="diagram-box">
+    Single Phase Full-Wave AC Voltage Controller (Anti-Parallel SCR)
+    ═══════════════════════════════════════════════════════════════
+
+                A ──┬─────────────────┬──── A
+                    │                 │
+              ┌─────┴─────┐     ┌─────┴─────┐
+              │           │     │           │
+      AC      │   T1(SCR) │     │   T2(SCR) │
+    Supply    │  (Anode→) │     │  (←Anode) │
+    ~Vs       │           │     │           │
+              └─────┬─────┘     └─────┬─────┘
+                    │                 │
+                B ──┴─────────────────┴──── B
+                            │
+                         ┌──┴──┐
+                         │  R  │  (Load)
+                         │(Load│
+                         └──┬──┘
+                            │
+                           ═══  (Common / Neutral)
+
+    Gate Firing:
+      G1 ──► T1 fired during POSITIVE half cycle  (α to π)
+      G2 ──► T2 fired during NEGATIVE half cycle  (α+π to 2π)
+
+    ┌─────────────┬──────────────────────────────────────────┐
+    │ Component   │ Role                                     │
+    ├─────────────┼──────────────────────────────────────────┤
+    │ T1 (SCR)    │ Conducts during +ve half cycle           │
+    │ T2 (SCR)    │ Conducts during –ve half cycle           │
+    │ R (Load)    │ Purely resistive load (fan, heater, etc.)│
+    │ G1, G2      │ Gate trigger pulses (from firing circuit)│
+    └─────────────┴──────────────────────────────────────────┘
+    </div>
+    <p class="caption">Fig. 1 — Anti-parallel SCR AC voltage controller circuit</p>
+
+    <div class="tip">
+      <strong>🧠 Memory Tip:</strong> "Two SCRs face each other back-to-back — T1 handles + half, T2 handles − half."
+    </div>
+  </div>
+
+  <!-- ── 2. Theory & Working ───────────────────────────── -->
+  <div class="card">
+    <h2><span class="num">2</span>Theory &amp; Working (Firing Angle Control)</h2>
+
+    <h3>What is an AC Voltage Controller?</h3>
+    <ul class="bullet">
+      <li>An <strong>AC voltage controller</strong> changes the <strong>RMS value of AC output voltage</strong> without changing its frequency.</li>
+      <li>It does this by controlling the <strong>firing angle α</strong> of the SCRs.</li>
+      <li>Used as a <strong>fan regulator, light dimmer, and heater control</strong>.</li>
+    </ul>
+
+    <h3>Working — Step by Step</h3>
+    <ol class="num">
+      <li>
+        <strong>Positive Half Cycle (0 to π):</strong><br>
+        The AC supply goes positive. T1 is forward-biased. At angle <strong>α</strong>, a gate pulse is given to T1.
+        T1 fires and conducts from α to π, passing current through load R.
+        After π, supply reverses → T1 turns OFF naturally (line commutation).
+      </li>
+      <li>
+        <strong>Negative Half Cycle (π to 2π):</strong><br>
+        The supply goes negative. T2 is forward-biased. At angle <strong>π + α</strong>, a gate pulse is given to T2.
+        T2 fires and conducts from (π + α) to 2π, passing current in reverse through load R.
+        After 2π, T2 turns OFF naturally.
+      </li>
+      <li>
+        <strong>Load receives both half cycles</strong> — so it is a <strong>full-wave</strong> controller.
+      </li>
+      <li>
+        <strong>By varying α</strong> from 0° to 180°, we control how long each SCR conducts per cycle,
+        thus controlling the RMS output voltage.
+      </li>
+    </ol>
+
+    <h3>Firing Angle (α) Control</h3>
+    <div class="highlight">
+      <strong>α = 0°</strong> → SCR fires at the very start → Maximum output voltage (= full supply)<br>
+      <strong>α = 90°</strong> → SCR fires at mid-cycle → Medium output voltage<br>
+      <strong>α = 180°</strong> → SCR never gets time to conduct → Zero output voltage
+    </div>
+
+    <h3>RMS Output Voltage Formula</h3>
+    <div class="formula">
+      Vo(rms) = Vs × √[ (1/π) × (π − α + sin(2α)/2) ]
+      <br><br>
+      where:  Vs = Peak supply voltage,  α = Firing angle
+    </div>
+
+    <div class="tip">
+      <strong>🧠 Memory Tip:</strong> "More α = less voltage. Less α = more voltage. α = 0 → full power. α = 180 → zero power."
+    </div>
+
+    <h3>Key Features</h3>
+    <ul class="bullet">
+      <li><strong>Natural / Line Commutation</strong> — SCRs turn OFF automatically when supply current crosses zero. No forced commutation needed.</li>
+      <li><strong>Full-wave operation</strong> — Both +ve and −ve halves are utilized → better waveform than half-wave.</li>
+      <li><strong>Simple circuit</strong> — Only two SCRs and a gate firing circuit needed.</li>
+      <li><strong>Smooth control</strong> — Output voltage varies smoothly from 0 to Vs by changing α.</li>
+    </ul>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Firing Angle α</th><th>Conduction Period</th><th>Output Voltage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0°</td><td>Full half-cycle (0 to π)</td><td>Maximum (= Vs)</td></tr>
+        <tr><td>60°</td><td>120° per half-cycle</td><td>High</td></tr>
+        <tr><td>90°</td><td>90° per half-cycle</td><td>Medium</td></tr>
+        <tr><td>120°</td><td>60° per half-cycle</td><td>Low</td></tr>
+        <tr><td>180°</td><td>0° (no conduction)</td><td>Zero</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── 3. Waveforms ───────────────────────────────────── -->
+  <div class="card">
+    <h2><span class="num">3</span>Waveforms (for firing angle α = 60°)</h2>
+
+    <p style="margin-bottom:14px; font-size:0.93rem; color:#475569;">
+      The four waveforms below are drawn for <strong>α = 60°</strong>.
+      In the exam, clearly label the x-axis (ωt) with: <strong>0, α, π, π+α, 2π</strong>.
+    </p>
+
+    <!-- (i) Input Voltage -->
+    <h3>(i) Input Voltage — v<sub>s</sub></h3>
+    <p style="font-size:0.9rem; color:#475569; margin-bottom:6px;">
+      Pure sine wave — always present regardless of SCR firing. This is the AC supply.
+    </p>
+    <div class="wave-box">
+    v_s
+      |        ╭─────╮                   ╭─────╮
+      |      ╭╯       ╰╮               ╭╯       ╰╮
+      |    ╭╯           ╰╮           ╭╯           ╰╮
+    ──┼───╯───────────────╰─────────╯───────────────╰──── ωt
+      |    0    α    π   π+α   2π       (next cycle)
+      |                  ╰─────╮     ╰─────╮
+      |                         ╰╮         ╰╮
+      |                           ╰─────────╯
+      (Continuous sine wave, both +ve and –ve halves)
+    </div>
+    <p class="caption">Fig. 2(i) — Input voltage vs (continuous sinusoid)</p>
+
+    <!-- (ii) Gate Signals -->
+    <h3>(ii) Gate Signals for T1 and T2</h3>
+    <p style="font-size:0.9rem; color:#475569; margin-bottom:6px;">
+      T1 gets a short pulse at <strong>α</strong> in every positive half cycle.<br>
+      T2 gets a short pulse at <strong>π + α</strong> in every negative half cycle.
+    </p>
+    <div class="wave-box">
+    Gate pulse for T1 (fires at α each +ve half):
+      |
+      |        ║                          ║
+      |        ║                          ║
+    ──┼────────╫──────────────────────────╫──── ωt
+      |        α         π              2π+α
+
+    Gate pulse for T2 (fires at π+α each –ve half):
+      |
+      |                  ║                          ║
+      |                  ║                          ║
+    ──┼──────────────────╫──────────────────────────╫── ωt
+      |        α        π+α        2π             3π+α
+
+    (Each pulse is a narrow spike sent from the firing/triggering circuit)
+    </div>
+    <p class="caption">Fig. 2(ii) — Gate trigger pulses for T1 and T2</p>
+
+    <!-- (iii) Output Voltage -->
+    <h3>(iii) Output Voltage — v<sub>o</sub></h3>
+    <p style="font-size:0.9rem; color:#475569; margin-bottom:6px;">
+      Zero from 0 to α (SCR not yet fired), then follows the sine wave from α to π.
+      Repeats for negative half. The <strong>chopped sine wave</strong> shows reduced RMS value.
+    </p>
+    <div class="wave-box">
+    v_o
+      |              ╭─────╮                        ╭─────╮
+      |            ╭╯       ╰╮                    ╭╯       ╰╮
+      |           ╭╯         ╰╮                  ╭╯         ╰╮
+    ──┼──────────╱─────────────╲────────────────╱─────────────╲── ωt
+      |  0   α  ←conduction→  π  α(neg)         π+α          2π
+      |  (zero)  T1 ON         (zero)  T2 ON    (zero)
+      |                         ╲─────╮                  ╲─────╮
+      |                               ╰╮                        ╰╮
+      |                                ╰────────────────────────╯
+    NOTE: Output is zero from 0 to α (T1 not fired yet)
+          Output follows –ve sine from (π+α) to 2π (T2 conducting)
+    </div>
+    <p class="caption">Fig. 2(iii) — Output voltage vo (chopped sinusoid, both halves)</p>
+
+    <!-- (iv) Output Current -->
+    <h3>(iv) Output Current — i<sub>o</sub></h3>
+    <p style="font-size:0.9rem; color:#475569; margin-bottom:6px;">
+      For a <strong>purely resistive load</strong>, current is always proportional to voltage (i = v/R).
+      So the output current waveform has the <strong>exact same shape as the output voltage</strong>.
+    </p>
+    <div class="wave-box">
+    i_o
+      |              ╭─────╮                        ╭─────╮
+      |            ╭╯       ╰╮                    ╭╯       ╰╮
+      |           ╭╯         ╰╮                  ╭╯         ╰╮
+    ──┼──────────╱─────────────╲────────────────╱─────────────╲── ωt
+      |  0   α  ←i_o = vo/R→  π  α(neg)         π+α          2π
+      |  (zero)  T1 conducts   (zero)  T2 conducts  (zero)
+      |                         ╲─────╮                  ╲─────╮
+      |                               ╰╮                        ╰╮
+      |                                ╰────────────────────────╯
+    NOTE: i_o = v_o / R  (for pure R load)
+          Current flows through T1 in +ve half, through T2 in –ve half
+          Current waveform = mirror of voltage waveform (same shape, scaled by 1/R)
+    </div>
+    <p class="caption">Fig. 2(iv) — Output current io (same shape as vo, scaled by 1/R)</p>
+
+    <div class="tip">
+      <strong>🧠 Memory Tip for Waveforms:</strong>
+      <ul class="bullet" style="margin-top:8px;">
+        <li><strong>vs</strong> → Full uninterrupted sine wave (supply is always there)</li>
+        <li><strong>Gate G1</strong> → Short spike at α (every +ve half cycle)</li>
+        <li><strong>Gate G2</strong> → Short spike at π+α (every –ve half cycle)</li>
+        <li><strong>vo</strong> → Zero from 0→α, then sine from α→π; zero from π→(π+α), then −sine from (π+α)→2π</li>
+        <li><strong>io</strong> → Exactly same shape as vo (because load is pure R)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── 4. Quick Summary ───────────────────────────────── -->
+  <div class="card">
+    <h2><span class="num">4</span>Quick Summary for Exam Writing</h2>
+
+    <ol class="num">
+      <li><strong>Two SCRs anti-parallel</strong> — T1 for +ve half, T2 for −ve half.</li>
+      <li><strong>Gate pulse at angle α</strong> triggers the SCR to start conducting.</li>
+      <li><strong>SCR conducts from α to π</strong> (or π+α to 2π) — rest of the time output is zero.</li>
+      <li><strong>Natural commutation</strong> — SCR turns OFF at supply zero crossing (no external circuit needed).</li>
+      <li><strong>Increasing α → less conduction time → lower RMS output → less power.</strong></li>
+      <li><strong>For R-load</strong> — current waveform is identical to voltage waveform (i = v/R).</li>
+      <li><strong>Applications:</strong> Fan speed regulator, light dimmer, AC heater control, induction heating.</li>
+    </ol>
+
+    <div class="highlight">
+      <strong>Exam formula to remember:</strong><br>
+      V<sub>o(rms)</sub> = V<sub>m</sub>/√2 × √[ 1 − (α/π) + sin(2α)/(2π) ]
+    </div>
+  </div>
+
+</div><!-- end .wrapper -->
+
+</body>
+</html>
