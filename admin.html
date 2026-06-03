@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin | Enlighten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">Enlighten Admin</a>
+    <nav aria-label="Admin navigation">
+      <a href="index.html">Site</a>
+      <a href="Papers.html">Papers</a>
+      <a href="result.html">Results</a>
+      <button class="nav-button" id="logoutButton" type="button">Logout</button>
+    </nav>
+  </header>
+
+  <main class="admin-shell">
+    <section class="panel admin-key-panel">
+      <div>
+        <p class="eyebrow">Admin Access</p>
+        <h1>Upload notes, papers, and class test results.</h1>
+      </div>
+      <div class="key-form">
+        <label>Signed In</label>
+        <div class="admin-session-box" id="adminIdentity">Checking admin session...</div>
+        <p id="adminStatus" class="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <form id="noteForm" class="panel form-panel">
+        <div class="section-head">
+          <p class="eyebrow">Notes Library</p>
+          <h2>Add Notes PDF</h2>
+        </div>
+
+        <label for="noteTitle">Notes Title</label>
+        <input id="noteTitle" name="title" placeholder="Engineering Physics Unit 1" required />
+
+        <label for="noteSubject">Subject</label>
+        <input id="noteSubject" name="subject" list="subjectOptions" placeholder="Engineering Physics" required />
+
+        <div class="split">
+          <div>
+            <label for="noteBranch">Branch</label>
+            <input id="noteBranch" name="branch" placeholder="First Year" />
+          </div>
+          <div>
+            <label for="noteYear">Academic Year</label>
+            <input id="noteYear" name="academicYear" placeholder="2026" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <label for="noteSemester">Semester</label>
+            <input id="noteSemester" name="semester" placeholder="Sem 1" />
+          </div>
+          <div>
+            <label for="noteUnit">Unit</label>
+            <input id="noteUnit" name="unit" placeholder="Unit 1" />
+          </div>
+        </div>
+
+        <label for="notePdf">PDF File</label>
+        <input id="notePdf" name="pdf" type="file" accept="application/pdf" required />
+
+        <button class="primary" type="submit">Upload Notes</button>
+        <p id="noteMessage" class="message" role="status" aria-live="polite"></p>
+      </form>
+
+      <form id="paperForm" class="panel form-panel">
+        <div class="section-head">
+          <p class="eyebrow">PDF Storage</p>
+          <h2>Add Question Paper</h2>
+        </div>
+
+        <label for="paperTitle">Paper Title</label>
+        <input id="paperTitle" name="title" placeholder="BXE May/June 2026" required />
+
+        <label for="paperSubject">Subject</label>
+        <input id="paperSubject" name="subject" list="subjectOptions" placeholder="Basic Electronics Engineering" required />
+
+        <div class="split">
+          <div>
+            <label for="paperBranch">Branch</label>
+            <input id="paperBranch" name="branch" placeholder="First Year" />
+          </div>
+          <div>
+            <label for="paperYear">Academic Year</label>
+            <input id="paperYear" name="academicYear" placeholder="2026" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <label for="paperSemester">Semester</label>
+            <input id="paperSemester" name="semester" placeholder="Sem 1" />
+          </div>
+          <div>
+            <label for="paperSession">Exam Session</label>
+            <input id="paperSession" name="examSession" placeholder="May/June" />
+          </div>
+        </div>
+
+        <label for="paperPdf">PDF File</label>
+        <input id="paperPdf" name="pdf" type="file" accept="application/pdf" required />
+
+        <button class="primary" type="submit">Upload Paper</button>
+        <p id="paperMessage" class="message" role="status" aria-live="polite"></p>
+      </form>
+
+      <form id="resultForm" class="panel form-panel wide-panel">
+        <div class="section-head">
+          <p class="eyebrow">Marks Data</p>
+          <h2>Add Result</h2>
+        </div>
+
+        <label for="studentName">Student Name</label>
+        <input id="studentName" name="studentName" placeholder="Student full name" required />
+
+        <label for="rollNo">Roll No</label>
+        <input id="rollNo" name="rollNo" placeholder="21" required />
+
+        <label for="resultSubject">Subject</label>
+        <input id="resultSubject" name="subject" list="subjectOptions" placeholder="Computer" required />
+
+        <label for="testName">Test Name</label>
+        <input id="testName" name="testName" placeholder="Class Test 1" required />
+
+        <label for="marks">Marks</label>
+        <input id="marks" name="marks" placeholder="18 / 20" required />
+
+        <button class="primary" type="submit">Add Result</button>
+        <p id="resultMessage" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="grid">
+      <section class="panel table-panel">
+        <div class="section-head">
+          <p class="eyebrow">Live Data</p>
+          <h2>Recent Notes</h2>
+        </div>
+        <div id="notesList" class="list-state">Loading notes...</div>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="section-head">
+          <p class="eyebrow">Live Data</p>
+          <h2>Recent Papers</h2>
+        </div>
+        <div id="papersList" class="list-state">Loading papers...</div>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="section-head">
+          <p class="eyebrow">Private Data</p>
+          <h2>Recent Results</h2>
+        </div>
+        <div id="resultsList" class="list-state">Enter admin key to load results.</div>
+      </section>
+    </section>
+  </main>
+
+  <datalist id="subjectOptions">
+    <option value="Basic Electrical Engineering"></option>
+    <option value="Basic Electronics Engineering"></option>
+    <option value="Engineering Chemistry"></option>
+    <option value="Engineering Graphics"></option>
+    <option value="Engineering Mathematics - I"></option>
+    <option value="Engineering Mathematics - II"></option>
+    <option value="Engineering Mechanics"></option>
+    <option value="Engineering Physics"></option>
+    <option value="Systems in Mechanical Engineering"></option>
+    <option value="Computer Graphics"></option>
+    <option value="Data Structures & Algorithms"></option>
+    <option value="Database Management System"></option>
+    <option value="Digital Electronics & Logic Design"></option>
+    <option value="Discrete Mathematics"></option>
+    <option value="Engineering Mathematics III"></option>
+    <option value="Object Oriented Programming"></option>
+    <option value="Operating Systems"></option>
+    <option value="Principles of Communication Systems"></option>
+    <option value="Signals & Systems"></option>
+    <option value="Software Engineering"></option>
+    <option value="Statistics"></option>
+  </datalist>
+
+  <script src="config.js"></script>
+  <script src="admin.js" defer></script>
+</body>
+</html>

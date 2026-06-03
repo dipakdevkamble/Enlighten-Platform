@@ -5,3 +5,5 @@ build/
 .next/
 .cache/
 .vscode/
+data/
+*.log

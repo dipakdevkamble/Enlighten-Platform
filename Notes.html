@@ -105,6 +105,19 @@
             <h1>My Notes Library</h1>
         </header>
 
+        <section class="uploaded-notes" id="uploadedNotesSection" hidden>
+            <h2>Recently Uploaded Notes</h2>
+            <div id="uploadedNotes" class="uploaded-notes-grid"></div>
+        </section>
+
+        <section class="subject-notes-panel" id="subjectNotesPanel" hidden>
+            <div class="subject-notes-head">
+                <h2 id="subjectNotesTitle">Subject Notes</h2>
+                <p>PDFs uploaded by admin for the selected subject.</p>
+            </div>
+            <div id="subjectNotesBody" class="subject-notes-body"></div>
+        </section>
+
         <!-- FE Section -->
         <section id="fe-notes" class="notes-section">
             <h3>FE Notes Library</h3>
@@ -394,6 +407,7 @@
 
     </main>
 </div>
+<script src="config.js"></script>
 <script src="Notes.js"></script>
 </body>
 </html>

@@ -1,4 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const API_BASE =
+    window.ENLIGHTEN_API_BASE ||
+    (window.location.protocol === "file:" ||
+    (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
+    (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
+      ? "http://localhost:3000"
+      : "");
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;",
+    }[char]));
+  }
+
+  function subjectKey(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
   document.querySelectorAll('a.download-btn[href="#"]').forEach((link) => {
     link.textContent = "Coming soon";
     link.setAttribute("aria-disabled", "true");
@@ -10,6 +37,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Subject toggle (show/hide PDF list)
   document.querySelectorAll(".subject-header").forEach((btn) => {
+    async function loadSubjectPapers(group, list) {
+      const subject = btn.querySelector("span")?.textContent?.trim();
+      if (!subject) return;
+
+      list.querySelectorAll(".uploaded-pdf-item").forEach((item) => item.remove());
+
+      try {
+        const response = await fetch(`${API_BASE}/api/papers?subjectKey=${encodeURIComponent(subjectKey(subject))}`, {
+          credentials: "include",
+        });
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok || !body.papers?.length) return;
+
+        body.papers
+          .slice()
+          .reverse()
+          .forEach((paper) => {
+            const row = document.createElement("div");
+            row.className = "pdf-item uploaded-pdf-item";
+            row.innerHTML = `
+              <i class="fa-solid fa-file-pdf"></i>
+              <a class="file-name" href="${escapeHtml(paper.file_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(paper.title)}</a>
+              <a href="${escapeHtml(paper.file_url)}" class="download-btn" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            `;
+            list.prepend(row);
+          });
+      } catch {
+        group.classList.add("api-unavailable");
+      }
+    }
+
     btn.addEventListener("click", () => {
       const group = btn.closest(".subject-group");
       const list = group?.querySelector(".pdf-list");
@@ -24,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         list.hidden = false;
         group.classList.add("open");
+        loadSubjectPapers(group, list);
       }
     });
   });
@@ -94,4 +153,35 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  const uploadedSection = document.getElementById("uploadedPapersSection");
+  const uploadedPapers = document.getElementById("uploadedPapers");
+
+  async function loadUploadedPapers() {
+    if (!uploadedSection || !uploadedPapers) return;
+
+    try {
+      const response = await fetch(`${API_BASE}/api/papers`, { credentials: "include" });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok || !body.papers?.length) return;
+
+      uploadedPapers.innerHTML = body.papers
+        .map(
+          (paper) => `
+            <article class="uploaded-card">
+              <strong>${escapeHtml(paper.title)}</strong>
+              <span>${escapeHtml(paper.subject)}${paper.branch ? ` - ${escapeHtml(paper.branch)}` : ""}</span>
+              <span>${escapeHtml(paper.exam_session || "")} ${escapeHtml(paper.academic_year || "")}</span>
+              <a class="download-btn" href="${escapeHtml(paper.file_url)}" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            </article>
+          `
+        )
+        .join("");
+      uploadedSection.hidden = false;
+    } catch {
+      uploadedSection.hidden = true;
+    }
+  }
+
+  loadUploadedPapers();
 });

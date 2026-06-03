@@ -3,435 +3,773 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Class Test Result</title>
+  <title>Class Test Result | Enlighten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <style>
-    :root{
-      --bg:#fff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --border:#e5e7eb;
-      --primary:#3f4cff;
-      --primary2:#4f46e5;
-      --shadow:0 18px 50px rgba(15,23,42,.12);
-      --radius:22px;
-      --ok:#16a34a;
-      --bad:#ef4444;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
+    :root {
+      --bg: #f6f8fc;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #dbe3ef;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --success: #166534;
+      --success-bg: #ecfdf3;
+      --danger: #991b1b;
+      --danger-bg: #fef2f2;
+      --warning: #92400e;
+      --warning-bg: #fffbeb;
+      --shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
     }
 
-    /* Navbar */
-    .nav{
-      position:sticky; top:0; z-index:10;
-      background:rgba(255,255,255,.9);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(229,231,235,.8);
-    }
-    .navInner{
-      max-width:1200px;
-      margin:0 auto;
-      padding:14px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.4px}
-    .brandMark{
-      width:34px;height:34px;border-radius:10px;
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      box-shadow:0 10px 20px rgba(79,70,229,.25);
-    }
-    .navLinks{display:flex;gap:28px;color:#334155;font-weight:600}
-    .navLinks a{color:inherit;text-decoration:none}
-    .navLinks a:hover{color:var(--text)}
-    .navBtn{
-      border:0; cursor:pointer;
-      padding:12px 22px;
-      border-radius:14px;
-      font-weight:800;
-      color:#fff;
-      text-decoration:none;
-      background:linear-gradient(180deg,var(--primary),var(--primary2));
-      box-shadow:0 14px 25px rgba(63,76,255,.18);
+    * {
+      box-sizing: border-box;
     }
 
-    .container{max-width:1200px;margin:0 auto;padding:26px 18px 60px}
-    .card{
-      margin-top:18px;
-      border:1px solid rgba(229,231,235,.9);
-      background:#fff;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:32px;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:22px;
-      align-items:start;
-    }
-    @media (max-width:920px){ .card{grid-template-columns:1fr} }
-
-    .title{
-      margin:0 0 10px;
-      font-size:clamp(34px,4.2vw,54px);
-      line-height:1.05;
-      letter-spacing:-1px;
-    }
-    .title .accent{color:var(--primary2)}
-    .desc{margin:0 0 18px;color:var(--muted);line-height:1.55;max-width:56ch;font-weight:500}
-
-    .formCard, .resultCard{
-      border:1px solid rgba(229,231,235,.9);
-      border-radius:18px;
-      padding:18px;
-      background:#fff;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background: var(--bg);
+      font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:560px){ .grid{grid-template-columns:1fr} }
-
-    label{display:block;font-size:12px;color:#475569;font-weight:700;margin:0 0 6px}
-    input, select{
-      width:100%;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
-      outline:none;
-      font-size:14px;
-      background:#fff;
-    }
-    input:focus, select:focus{
-      border-color:rgba(79,70,229,.65);
-      box-shadow:0 0 0 4px rgba(79,70,229,.10);
+    a {
+      color: inherit;
     }
 
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn{
-      cursor:pointer;
-      border-radius:14px;
-      padding:12px 16px;
-      font-weight:800;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-    }
-    .btnPrimary{
-      border:0;color:#fff;
-      background:linear-gradient(180deg,var(--primary),var(--primary2));
-      box-shadow:0 12px 22px rgba(63,76,255,.18);
-    }
-
-    .hintRow{
-      margin-top:10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:600;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 68px;
+      padding: 0 7vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(219, 227, 239, 0.9);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
     }
 
-    .error, .info{
-      margin-top:12px;
-      display:none;
-      padding:10px 12px;
-      border-radius:14px;
-      font-weight:700;
-      font-size:13px;
-      line-height:1.35;
-    }
-    .error{
-      border:1px solid rgba(239,68,68,.35);
-      background:rgba(239,68,68,.08);
-      color:#991b1b;
-    }
-    .info{
-      border:1px solid rgba(59,130,246,.25);
-      background:rgba(59,130,246,.08);
-      color:#1e3a8a;
+    .brand {
+      color: var(--primary-dark);
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      border:1px solid rgba(229,231,235,.9);
-      background:#f8fafc;
+    .topbar nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    .pill.ok{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.22);color:#166534}
-    .pill.bad{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#991b1b}
 
-    .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-    .kvItem{border:1px solid rgba(229,231,235,.9);border-radius:16px;padding:12px}
-    .k{color:var(--muted);font-size:12px;font-weight:800;margin-bottom:6px}
-    .v{font-size:16px;font-weight:900}
-    .big{font-size:28px;letter-spacing:-.4px}
-    .empty{color:var(--muted);font-weight:700;font-size:13px;line-height:1.45}
+    .topbar nav a,
+    .nav-button {
+      color: #334155;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      font: inherit;
+      font-size: 0.94rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
 
-    @media print{
-      .nav, .actions, .hintRow, .error, .info { display:none !important; }
-      .container{padding:0}
-      .card{box-shadow:none}
+    .nav-button {
+      padding: 0;
+    }
+
+    .topbar nav a[aria-current="page"] {
+      color: var(--primary-dark);
+    }
+
+    .result-shell {
+      width: min(1180px, 92%);
+      margin: 32px auto 56px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      max-width: 780px;
+      font-size: clamp(1.85rem, 3vw, 3rem);
+      line-height: 1.12;
+    }
+
+    h2 {
+      margin-bottom: 4px;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .lookup-form {
+      display: grid;
+      gap: 13px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    label {
+      color: #334155;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.94rem;
+    }
+
+    input:focus {
+      border-color: rgba(37, 99, 235, 0.65);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+      outline: none;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    button {
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: #334155;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.4;
+    }
+
+    .primary {
+      border-color: var(--primary);
+      color: #fff;
+      background: var(--primary);
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
+    .message {
+      min-height: 20px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .message[data-type="success"] {
+      color: var(--success);
+    }
+
+    .message[data-type="error"] {
+      color: var(--danger);
+    }
+
+    .message[data-type="warning"] {
+      color: var(--warning);
+    }
+
+    .result-panel {
+      min-height: 420px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .result-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .status-pill {
+      min-height: 32px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--panel-soft);
+      color: #475569;
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .status-pill[data-type="success"] {
+      border-color: rgba(22, 101, 52, 0.25);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-pill[data-type="error"] {
+      border-color: rgba(153, 27, 27, 0.25);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .empty-state {
+      padding: 20px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .result-sheet {
+      display: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .result-sheet.is-visible {
+      display: block;
+    }
+
+    .student-band {
+      padding: 18px;
+      background: #0f172a;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .student-band span {
+      display: block;
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .student-band strong {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      line-height: 1.15;
+    }
+
+    .marks-badge {
+      min-width: 110px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+
+    .marks-badge span {
+      color: #bfdbfe;
+    }
+
+    .marks-badge strong {
+      margin-top: 3px;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+    }
+
+    .result-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+    }
+
+    .detail-row {
+      min-height: 76px;
+      padding: 14px 16px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .detail-row span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .detail-row strong {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .result-note {
+      margin: 0;
+      padding: 14px 16px;
+      color: var(--muted);
+      background: var(--panel-soft);
+      font-size: 0.84rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        padding: 16px 5vw;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+    }
+
+    @media (max-width: 560px) {
+      .result-shell {
+        width: min(100% - 24px, 1180px);
+        margin-top: 18px;
+      }
+
+      .panel,
+      .panel {
+        padding: 16px;
+      }
+
+      .split,
+      .result-details,
+      .student-band {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-row {
+        border-right: 0;
+      }
+
+      .marks-badge {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .topbar,
+      .lookup-panel,
+      .actions,
+      .message,
+      .empty-state {
+        display: none !important;
+      }
+
+      .result-shell {
+        width: 100%;
+        margin: 0;
+      }
+
+      .workspace {
+        display: block;
+      }
+
+      .result-panel {
+        box-shadow: none;
+        border: 0;
+      }
     }
   </style>
 </head>
 <body>
-
-  <header class="nav">
-    <div class="navInner">
-      <div class="brand">
-        <div class="brandMark" aria-hidden="true"></div>
-        <span>NLIGHTEN</span>
-      </div>
-      <nav class="navLinks" aria-label="Top navigation">
-        <a href="index.html">Home</a>
-        <a href="Notes.html">Notes</a>
-        <a href="Papers.html">Papers</a>
-        <a href="Lectures.html">Lectures</a>
-        <a href="About.html">About</a>
-      </nav>
-      <a class="navBtn" href="login.html">Login</a>
-    </div>
+  <header class="topbar">
+    <a class="brand" href="index.html">Enlighten</a>
+    <nav aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="Notes.html">Notes</a>
+      <a href="Papers.html">Papers</a>
+      <a href="Lectures.html">Lectures</a>
+      <a href="About.html">About</a>
+      <a href="result.html" aria-current="page">Results</a>
+      <button class="nav-button" id="logoutButton" type="button">Logout</button>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="card">
-      <!-- Left -->
-      <div>
-        <h1 class="title">Class Test <span class="accent">Result</span></h1>
-        <p class="desc">
-          Enter your <strong>Name</strong> and <strong>Roll No</strong> to view your marks.
-          (Marks should be fetched from a secure server, not stored in this HTML file.)
-        </p>
+  <main class="result-shell">
+    <section class="workspace">
+      <section class="panel lookup-panel" aria-label="Result lookup">
+        <p class="eyebrow">Search</p>
+        <h2>Find Result</h2>
 
-        <div class="formCard">
-          <div class="grid">
-            <div>
-              <label for="name">Student Name</label>
-              <input id="name" type="text" placeholder="Enter your name" autocomplete="name" />
-            </div>
-            <div>
+        <form class="lookup-form" id="resultForm" novalidate>
+          <div class="field">
+            <label for="name">Student Name</label>
+            <input id="name" name="name" type="text" placeholder="Student full name" autocomplete="name" required />
+          </div>
+
+          <div class="split">
+            <div class="field">
               <label for="roll">Roll No</label>
-              <input id="roll" type="text" placeholder="e.g., 21" />
+              <input id="roll" name="roll" type="text" placeholder="21" required />
             </div>
-            <div>
-              <label for="subject">Subject</label>
-              <select id="subject">
-                <option value="">Select subject</option>
-                <option>Mathematics</option>
-                <option>Science</option>
-                <option>English</option>
-                <option>Computer</option>
-                <option>Social Studies</option>
-              </select>
+
+            <div class="field">
+              <label for="test">Test Name</label>
+              <input id="test" name="test" type="text" list="testOptions" placeholder="Class Test 1" required />
             </div>
-            <div>
-              <label for="test">Test</label>
-              <select id="test">
-                <option value="Class Test 1">Class Test 1</option>
-                <option value="Class Test 2">Class Test 2</option>
-              </select>
-            </div>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" list="subjectOptions" placeholder="Computer Graphics" required />
           </div>
 
           <div class="actions">
-            <button class="btn btnPrimary" id="btnFind" type="button">Get Result</button>
-            <button class="btn" id="btnReset" type="button">Reset</button>
-            <button class="btn" id="btnPrint" type="button">Print</button>
+            <button class="primary" id="findButton" type="submit">
+              <i data-lucide="search"></i>
+              Search
+            </button>
+            <button id="resetButton" type="button">
+              <i data-lucide="rotate-ccw"></i>
+              Reset
+            </button>
+            <button id="printButton" type="button">
+              <i data-lucide="printer"></i>
+              Print
+            </button>
           </div>
 
-          <div class="hintRow">
-            <div id="today"></div>
-            <div class="pill" id="dbPill">Secure API</div>
-          </div>
+          <p class="message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </section>
 
-          <div class="error" id="errorBox"></div>
-          <div class="info" id="infoBox"></div>
-        </div>
-      </div>
-
-      <!-- Right -->
-      <div class="resultCard">
-        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;">
+      <section class="panel result-panel" aria-label="Result summary">
+        <div class="result-top">
           <div>
-            <div class="k">Result Preview</div>
-            <div class="v">Marks will show after search</div>
+            <p class="eyebrow">Summary</p>
+            <h2>Result Details</h2>
           </div>
-          <div class="pill" id="statusPill">Not Searched</div>
+          <div class="status-pill" id="resultStatus">Not searched</div>
         </div>
 
-        <div id="emptyMsg" class="empty" style="margin-top:10px;">
-          Fill the form and click <strong>Get Result</strong>.
-        </div>
+        <div class="empty-state" id="emptyState">No result loaded.</div>
 
-        <div class="kv" id="resultKv" style="display:none;">
-          <div class="kvItem">
-            <div class="k">Student Name</div>
-            <div class="v" id="outName">—</div>
+        <div class="result-sheet" id="resultSheet">
+          <div class="student-band">
+            <div>
+              <span>Student</span>
+              <strong id="outName">-</strong>
+            </div>
+            <div class="marks-badge">
+              <span>Marks</span>
+              <strong id="outMarks">-</strong>
+            </div>
           </div>
-          <div class="kvItem">
-            <div class="k">Roll No</div>
-            <div class="v" id="outRoll">—</div>
+
+          <div class="result-details">
+            <div class="detail-row">
+              <span>Roll No</span>
+              <strong id="outRoll">-</strong>
+            </div>
+            <div class="detail-row">
+              <span>Subject</span>
+              <strong id="outSubject">-</strong>
+            </div>
+            <div class="detail-row">
+              <span>Test Name</span>
+              <strong id="outTest">-</strong>
+            </div>
+            <div class="detail-row">
+              <span>Status</span>
+              <strong id="outStatus">Published</strong>
+            </div>
           </div>
-          <div class="kvItem">
-            <div class="k">Subject</div>
-            <div class="v" id="outSubject">—</div>
-          </div>
-          <div class="kvItem">
-            <div class="k">Test</div>
-            <div class="v" id="outTest">—</div>
-          </div>
-          <div class="kvItem" style="grid-column:1 / -1;">
-            <div class="k">Marks</div>
-            <div class="v big" id="outMarks">—</div>
-          </div>
+
+          <p class="result-note" id="resultNote"></p>
         </div>
-      </div>
+      </section>
     </section>
   </main>
 
+  <datalist id="subjectOptions">
+    <option value="Basic Electrical Engineering"></option>
+    <option value="Basic Electronics Engineering"></option>
+    <option value="Engineering Chemistry"></option>
+    <option value="Engineering Graphics"></option>
+    <option value="Engineering Mathematics - I"></option>
+    <option value="Engineering Mathematics - II"></option>
+    <option value="Engineering Mechanics"></option>
+    <option value="Engineering Physics"></option>
+    <option value="Systems in Mechanical Engineering"></option>
+    <option value="Computer Graphics"></option>
+    <option value="Data Structures & Algorithms"></option>
+    <option value="Database Management System"></option>
+    <option value="Digital Electronics & Logic Design"></option>
+    <option value="Discrete Mathematics"></option>
+    <option value="Engineering Mathematics III"></option>
+    <option value="Object Oriented Programming"></option>
+    <option value="Operating Systems"></option>
+    <option value="Principles of Communication Systems"></option>
+    <option value="Signals & Systems"></option>
+    <option value="Software Engineering"></option>
+    <option value="Statistics"></option>
+  </datalist>
+  <datalist id="testOptions"></datalist>
+
+  <script src="config.js"></script>
   <script>
-    const el = (id) => document.getElementById(id);
-
-    // YYYY-MM-DD
-    (function(){
-      const d = new Date();
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth()+1).padStart(2,'0');
-      const dd = String(d.getDate()).padStart(2,'0');
-      el('today').textContent = `Date: ${yyyy}-${mm}-${dd}`;
-    })();
-
-    const RESULT_API_URL = "/api/results";
-
-    function normalize(s){ return String(s || "").trim().toLowerCase(); }
-
-    function showError(msg){
-      el('errorBox').style.display = 'block';
-      el('errorBox').textContent = msg;
-    }
-    function clearError(){
-      el('errorBox').style.display = 'none';
-      el('errorBox').textContent = '';
-    }
-    function showInfo(msg){
-      el('infoBox').style.display = 'block';
-      el('infoBox').textContent = msg;
-    }
-    function clearInfo(){
-      el('infoBox').style.display = 'none';
-      el('infoBox').textContent = '';
-    }
-
-    function setStatus(type, text){
-      const pill = el('statusPill');
-      pill.classList.remove('ok','bad');
-      pill.textContent = text;
-
-      if (type === 'ok') pill.classList.add('ok');
-      if (type === 'bad') pill.classList.add('bad');
-    }
-
-    function validate(){
-      const name = el('name').value.trim();
-      const roll = el('roll').value.trim();
-      const subject = el('subject').value.trim();
-      const test = el('test').value.trim();
-
-      if (!name) throw new Error('Please enter Student Name.');
-      if (!roll) throw new Error('Please enter Roll No.');
-      if (!/^[0-9A-Za-z-]+$/.test(roll)) throw new Error('Roll No should contain only letters/numbers (and -).');
-      if (!subject) throw new Error('Please select a Subject.');
-
-      return { name, roll, subject, test };
-    }
-
-    async function findResult(input){
-      const response = await fetch(RESULT_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-      });
-
-      if (!response.ok) {
-        throw new Error("Result service is not available yet. Connect /api/results on your server before publishing real marks.");
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide?.createIcons) {
+        window.lucide.createIcons();
       }
 
-      return response.json();
-    }
+      const API_BASE =
+        window.ENLIGHTEN_API_BASE ||
+        (window.location.protocol === "file:" ||
+        (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
+        (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
+          ? "http://localhost:3000"
+          : "");
 
-    function render(result, input){
-      el('outName').textContent = result.name;
-      el('outRoll').textContent = result.rollNo;
-      el('outSubject').textContent = result.subject;
-      el('outTest').textContent = result.test;
-      el('outMarks').textContent = result.marks;
+      const form = document.getElementById("resultForm");
+      const formMessage = document.getElementById("formMessage");
+      const findButton = document.getElementById("findButton");
+      const resetButton = document.getElementById("resetButton");
+      const printButton = document.getElementById("printButton");
+      const logoutButton = document.getElementById("logoutButton");
+      const resultStatus = document.getElementById("resultStatus");
+      const emptyState = document.getElementById("emptyState");
+      const resultSheet = document.getElementById("resultSheet");
+      const resultNote = document.getElementById("resultNote");
+      const subjectOptions = document.getElementById("subjectOptions");
+      const testOptions = document.getElementById("testOptions");
 
-      el('emptyMsg').style.display = 'none';
-      el('resultKv').style.display = 'grid';
+      const output = {
+        name: document.getElementById("outName"),
+        roll: document.getElementById("outRoll"),
+        subject: document.getElementById("outSubject"),
+        test: document.getElementById("outTest"),
+        marks: document.getElementById("outMarks"),
+        status: document.getElementById("outStatus"),
+      };
 
-      setStatus('ok', 'Result Found');
-      clearInfo();
-
-      // If name differs, show small note (optional)
-      if (normalize(result.name) !== normalize(input.name)) {
-        showInfo(`Note: Name matched by roll no. Stored name: "${result.name}".`);
+      function setMessage(text, type = "info") {
+        formMessage.textContent = text;
+        formMessage.dataset.type = type;
       }
-    }
 
-    function clearResultUI(){
-      el('resultKv').style.display = 'none';
-      el('emptyMsg').style.display = 'block';
-      setStatus(null, 'Not Searched');
-    }
+      function setStatus(text, type = "") {
+        resultStatus.textContent = text;
+        if (type) {
+          resultStatus.dataset.type = type;
+        } else {
+          delete resultStatus.dataset.type;
+        }
+      }
 
-    el('btnFind').addEventListener('click', async () => {
-      clearError(); clearInfo();
-      try{
-        const input = validate();
-        const res = await findResult(input);
+      function showEmpty(text = "No result loaded.") {
+        emptyState.textContent = text;
+        emptyState.hidden = false;
+        resultSheet.classList.remove("is-visible");
+        setStatus("Not searched");
+      }
 
-        if (!res){
-          clearResultUI();
-          setStatus('bad', 'Result Not Found');
-          showError('Result not found. Please check Name / Roll No / Subject / Test.');
+      function showResult(result) {
+        output.name.textContent = result.name || "-";
+        output.roll.textContent = result.rollNo || "-";
+        output.subject.textContent = result.subject || "-";
+        output.test.textContent = result.test || "-";
+        output.marks.textContent = result.marks || "-";
+        output.status.textContent = "Published";
+
+        const now = new Date();
+        resultNote.textContent = `Viewed on ${now.toLocaleDateString()} at ${now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        })}.`;
+
+        emptyState.hidden = true;
+        resultSheet.classList.add("is-visible");
+        setStatus("Result found", "success");
+      }
+
+      async function parseResponse(response) {
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(body.message || "Request failed.");
+        }
+        return body;
+      }
+
+      async function loadStudentSession() {
+        try {
+          const response = await fetch(`${API_BASE}/api/auth/me`, { credentials: "include" });
+          await parseResponse(response);
+        } catch {
+          window.location.href = "login.html";
+        }
+      }
+
+      function addOptions(datalist, values) {
+        const existing = new Set(
+          Array.from(datalist.querySelectorAll("option")).map((option) => option.value.toLowerCase())
+        );
+
+        values.forEach((value) => {
+          const cleanValue = String(value || "").trim();
+          if (!cleanValue || existing.has(cleanValue.toLowerCase())) return;
+
+          const option = document.createElement("option");
+          option.value = cleanValue;
+          datalist.append(option);
+          existing.add(cleanValue.toLowerCase());
+        });
+      }
+
+      async function loadResultOptions() {
+        try {
+          const response = await fetch(`${API_BASE}/api/results/options`, { credentials: "include" });
+          const { subjects, tests } = await parseResponse(response);
+          addOptions(subjectOptions, subjects || []);
+          addOptions(testOptions, tests || []);
+        } catch {
+          addOptions(testOptions, ["Class Test 1", "Class Test 2"]);
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
           return;
         }
 
-        render(res, input);
-      } catch(e){
-        clearResultUI();
-        setStatus('bad', 'Invalid Input');
-        showError(e.message || 'Invalid input.');
-      }
-    });
+        const payload = Object.fromEntries(new FormData(form).entries());
+        findButton.disabled = true;
+        setMessage("Searching result...");
+        setStatus("Searching");
 
-    el('btnReset').addEventListener('click', () => {
-      clearError(); clearInfo();
-      el('name').value = '';
-      el('roll').value = '';
-      el('subject').value = '';
-      el('test').value = 'Class Test 1';
-      clearResultUI();
-    });
+        try {
+          const result = await fetch(`${API_BASE}/api/results`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(payload),
+          }).then(parseResponse);
 
-    el('btnPrint').addEventListener('click', () => {
-      if (el('resultKv').style.display !== 'grid') {
-        showError('Please get the result first, then print.');
-        return;
-      }
-      clearError(); clearInfo();
-      window.print();
+          showResult(result);
+          setMessage("Result loaded.", "success");
+        } catch (err) {
+          showEmpty("Result not found.");
+          setStatus("Not found", "error");
+          setMessage(err.message, "error");
+        } finally {
+          findButton.disabled = false;
+        }
+      });
+
+      resetButton.addEventListener("click", () => {
+        form.reset();
+        setMessage("");
+        showEmpty();
+      });
+
+      printButton.addEventListener("click", () => {
+        if (!resultSheet.classList.contains("is-visible")) {
+          setMessage("Search a result before printing.", "warning");
+          return;
+        }
+        window.print();
+      });
+
+      logoutButton.addEventListener("click", async () => {
+        await fetch(`${API_BASE}/api/auth/logout`, { method: "POST", credentials: "include" });
+        window.location.href = "login.html";
+      });
+
+      showEmpty();
+      loadStudentSession();
+      loadResultOptions();
     });
   </script>
 </body>

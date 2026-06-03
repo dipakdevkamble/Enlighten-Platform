@@ -97,6 +97,52 @@ header h1 {
   font-size: 0.85rem;
 }
 
+.uploaded-papers {
+  margin: 0 0 22px;
+  padding: 18px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.uploaded-papers h3 {
+  margin: 0 0 12px;
+}
+
+.uploaded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.uploaded-card {
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #f8fafc;
+}
+
+.uploaded-card strong,
+.uploaded-card span {
+  display: block;
+}
+
+.uploaded-card strong {
+  color: #0f172a;
+}
+
+.uploaded-card span {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 0.86rem;
+}
+
+.uploaded-card a {
+  display: inline-block;
+  margin-top: 10px;
+}
+
 .download-btn { 
   color: #27ae60; 
   text-decoration: none; 
@@ -104,9 +150,11 @@ header h1 {
   font-size: 0.9rem; 
 }
 
-.download-btn:hover { text-decoration: underline; }
+.download-btn:hover { 
+  text-decoration: underline; 
+}
 
-/* Department panels: only show the selected department */
+
 .dept-panel { 
   display: none; 
 }
@@ -122,8 +170,12 @@ header h1 {
   overflow: hidden;
 }
 
-.subject-group { border-bottom: 1px solid #eee; }
-.subject-group:last-child { border-bottom: none; }
+.subject-group { 
+  border-bottom: 1px solid #eee;
+ }
+.subject-group:last-child { 
+  border-bottom: none; 
+}
 
 /* Subject header button row */
 .subject-header {
@@ -141,14 +193,18 @@ header h1 {
   user-select: none;
 }
 
-.subject-header:hover { background: #fafcff; }
+.subject-header:hover { 
+  background: #fafcff;
+ }
 
 .subject-header:focus-visible {
+
   outline: 2px solid rgba(20, 127, 235, 0.35);
   outline-offset: -2px;
 }
 
 .subject-header i {
+
   color: #5f6368;
   font-size: 1.2rem;
   width: 22px;
@@ -167,7 +223,9 @@ header h1 {
   transition: transform 0.2s ease;
 }
 
-.subject-group.open .subject-header .chevron { transform: rotate(180deg); }
+.subject-group.open .subject-header .chevron { 
+   transform: rotate(180deg); 
+}
 
 .download-btn[aria-disabled="true"] {
   cursor: not-allowed;
@@ -195,7 +253,9 @@ header h1 {
   gap: 12px;
 }
 
-.pdf-item:last-child { border-bottom: none; }
+.pdf-item:last-child { 
+  border-bottom: none; 
+}
 
 .pdf-item i {
   color: #e74c3c;
@@ -232,7 +292,11 @@ header h1 {
     border-bottom: 1px solid #ddd;
   }
 
-  .content { padding: 18px; }
+  .content { 
+    padding: 18px; 
+  }
 
-  .pdf-list { padding-left: 20px; }
+  .pdf-list { 
+    padding-left: 20px; 
+  }
 }

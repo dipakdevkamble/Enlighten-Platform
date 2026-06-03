@@ -17,18 +17,18 @@
   left: 0;
   width: 270px;
   height: 100vh;
-  /* Deep Slate Gradient for a premium look */
+ 
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: #cbd5e1;
-  /* Removed border-right, used shadow for cleaner separation */
+ 
   box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
   padding: 25px 20px;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  overflow-y: auto; /* Allows internal scrolling */
+  overflow-y: auto; 
   z-index: 1000;
 }
 
-/* Custom Scrollbar for the Sidebar */
+
 .sidebar::-webkit-scrollbar {
   width: 5px;
 }
@@ -53,7 +53,7 @@
 /* Year Names (Headlines) */
 .sidebar-section h3 {
   font-size: 0.85rem;
-  color: #94a3b8; /* Muted color for better hierarchy */
+  color: #94a3b8; 
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 25px 0 12px 0;
@@ -65,13 +65,13 @@
 }
 
 .sidebar-section h3:hover {
-  color: #f8fafc; /* Glows slightly when hovered */
+  color: #f8fafc; 
 }
 
 /* Accordion Logic */
 .sidebar-section ul {
   list-style: none;
-  padding-left: 0; /* Align with heading for modern look */
+  padding-left: 0; 
   display: none;
 }
 
@@ -100,7 +100,7 @@
 .sidebar-section li a {
   padding: 10px 15px;
   text-decoration: none;
-  color: #94a3b8; /* Default link color */
+  color: #94a3b8; 
   display: block;
   width: 100%;
   font-size: 0.9rem;
@@ -109,12 +109,12 @@
 
 /* Interaction Effects */
 .sidebar-section li:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* Glass effect */
-  padding-left: 8px; /* Smooth slide right */
+  background-color: rgba(255, 255, 255, 0.05); 
+  padding-left: 8px; 
 }
 
 .sidebar-section li:hover a {
-  color: #38bdf8; /* Link text turns blue on hover */
+  color: #38bdf8;
 }
 
 /* Active State */
@@ -130,7 +130,7 @@
 
 /* Main Content Styling */
 .main-content {
-  margin-left: 270px; /* matches sidebar width */
+  margin-left: 270px; 
   flex-grow: 1;
   padding: 40px;
   overflow-y: auto;
@@ -148,6 +148,115 @@ h3 {
   margin-bottom: 22px;
   color: #444;
   font-size: 22px;
+}
+
+.uploaded-notes {
+  margin: 0 0 34px;
+  padding: 22px;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.uploaded-notes h2 {
+  margin: 0 0 14px;
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.uploaded-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.uploaded-note-card {
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.uploaded-note-card strong,
+.uploaded-note-card span {
+  display: block;
+}
+
+.uploaded-note-card strong {
+  color: #0f172a;
+  font-size: 0.96rem;
+}
+
+.uploaded-note-card span {
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.uploaded-note-card a {
+  display: inline-flex;
+  margin-top: 12px;
+  color: #2563eb;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.uploaded-note-card a:hover {
+  text-decoration: underline;
+}
+
+.subject-notes-panel {
+  margin: 0 0 34px;
+  padding: 22px;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.subject-notes-head h2 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.subject-notes-head p {
+  margin: 0 0 14px;
+  color: #475569;
+  font-weight: 700;
+}
+
+.subject-notes-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.subject-pdf-link {
+  padding: 13px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.subject-pdf-link strong,
+.subject-pdf-link span {
+  display: block;
+}
+
+.subject-pdf-link span {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.subject-panel-state {
+  margin: 0;
+  color: #475569;
+  font-weight: 800;
 }
 
 hr {
@@ -213,40 +322,76 @@ hr {
 }
 
 /* Color Themes */
-.theme-blue { border-color: #b3d7ff; }
-.theme-blue .card-info { background-color: #e7f1ff; }
+.theme-blue { 
+  border-color: #b3d7ff; 
+}
+.theme-blue .card-info { 
+  background-color: #e7f1ff; 
+}
 
-.theme-green { border-color: #c8e6c9; }
-.theme-green .card-info { background-color: #e8f5e9; }
+.theme-green { 
+  border-color: #c8e6c9; 
+}
+.theme-green .card-info { 
+  background-color: #e8f5e9; 
+}
 
-.theme-purple { border-color: #d1c4e9; }
-.theme-purple .card-info { background-color: #f3e5f5; }
+.theme-purple { 
+  border-color: #d1c4e9;
+ }
+.theme-purple .card-info { 
+  background-color: #f3e5f5; 
+}
 
-.theme-orange { border-color: #ffe0b2; }
-.theme-orange .card-info { background-color: #fff3e0; }
+.theme-orange { 
+  border-color: #ffe0b2; 
+}
+.theme-orange .card-info { 
+  background-color: #fff3e0;
+ }
 
 /* --- SE Computer Themes (Teal/Cool tones) --- */
-.theme-teal { border-color: #4db6ac; }
-.theme-teal .card-info { background-color: #e0f2f1; }
+.theme-teal { 
+  border-color: #4db6ac; 
+}
+.theme-teal .card-info {
+   background-color: #e0f2f1; 
+  }
 
-.theme-indigo { border-color: #7986cb; }
-.theme-indigo .card-info { background-color: #e8eaf6; }
+.theme-indigo { 
+  border-color: #7986cb;
+ }
+.theme-indigo .card-info { 
+  background-color: #e8eaf6; 
+}
 
 /* --- SE IT Themes (Amber/Warm tones) --- */
-.theme-amber { border-color: #ffb300; }
-.theme-amber .card-info { background-color: #fff8e1; }
+.theme-amber { 
+  border-color: #ffb300; 
+}
+.theme-amber .card-info { 
+  background-color: #fff8e1;
+ }
 
-.theme-rose { border-color: #f06292; }
-.theme-rose .card-info { background-color: #fce4ec; }
+.theme-rose { 
+  border-color: #f06292; 
+}
+.theme-rose .card-info { 
+  background-color: #fce4ec;
+ }
 
-/* --- SE AIDS Themes (Darker Professional tones) --- */
-.theme-slate { border-color: #90a4ae; }
-.theme-slate .card-info { background-color: #eceff1; }
+/* --- SE AIDS Themes  --- */
+.theme-slate { 
+  border-color: #90a4ae; 
+}
+.theme-slate .card-info {
+   background-color: #eceff1;
+   }
 
 /* responsive */
 /* --- Mobile Phone Optimization --- */
 @media (max-width: 550px) {
-  /* 1. Stack sidebar on top of main content */
+ 
   .dashboard-container {
     flex-direction: column;
     height: auto;
@@ -255,13 +400,13 @@ hr {
 
   /* 2. Sidebar becomes a compact top-nav */
   .sidebar {
-    position: static; /* IMPORTANT: stop fixed overlay on mobile */
+    position: static; 
     width: 100%;
     height: auto;
     padding: 15px;
     border-right: none;
     border-bottom: 2px solid #eee;
-    background: #fff; /* keep your mobile preference */
+    background: #fff; 
     color: #111827;
     box-shadow: none;
   }
@@ -285,7 +430,7 @@ hr {
 
   .sidebar-section li {
     margin-bottom: 0;
-    padding-left: 0; /* avoid hover shift issues on mobile */
+    padding-left: 0; 
     background: #f1f1f1;
     border-radius: 20px;
   }
@@ -302,23 +447,36 @@ hr {
 
   /* 3. Main Content adjustments */
   .main-content {
-    margin-left: 0; /* IMPORTANT: remove desktop offset */
+    margin-left: 0; 
     padding: 20px 15px;
   }
 
-  .main-content h1 { font-size: 20px; text-align: center; }
+  .main-content h1 { 
+    font-size: 20px; 
+    text-align: center;
+   }
 
-  /* 4. One large card per row */
+  
   .notes-grid {
     grid-template-columns: 1fr;
     gap: 15px;
     margin-top: 20px;
   }
 
-  /* 5. Adjust Card height and text for readability */
-  .card { min-height: 180px; }
+  .uploaded-notes {
+    padding: 16px;
+  }
 
-  .card-img { height: 100px; }
+  
+  .card { 
+    min-height: 180px; 
+  }
 
-  .card-info { font-size: 15px; }
+  .card-img { 
+    height: 100px; 
+  }
+
+  .card-info { 
+    font-size: 15px;
+   }
 }

@@ -3,52 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
+  <title>Admin Login | Enlighten</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-
   <main class="auth login-page">
-    <section class="auth-card auth-card--compact" aria-label="Login">
+    <section class="auth-card auth-card--compact" aria-label="Admin login">
       <header class="auth-head">
-        
-        
-        <h1>Welcome Back</h1>
-        <p class="sub">Login to continue</p>
+        <h1>Admin Login</h1>
+        <p class="sub">Use an account marked as admin in Supabase.</p>
       </header>
 
-      <form class="auth-form" data-auth-form="login" novalidate>
+      <form class="auth-form" data-auth-form="admin-login" novalidate>
         <div class="field">
           <span>Email</span>
           <div class="input-wrap">
-            <input id="email" name="email" type="email" placeholder="Enter your email" required />
+            <input id="email" name="email" type="email" placeholder="Admin email" required />
           </div>
         </div>
 
         <div class="field">
           <span>Password</span>
           <div class="input-wrap">
-            <input id="password" name="password" type="password" placeholder="Enter your password" required />
+            <input id="password" name="password" type="password" placeholder="Admin password" required />
           </div>
-        </div>
-
-        <div class="row">
-          <label class="check">
-            <input type="checkbox" />
-            Remember me
-          </label>
-          <a class="link" href="forgot-password.html">Forgot password?</a>
         </div>
 
         <p class="form-message" role="status" aria-live="polite"></p>
 
-        <button class="btn primary" type="submit">Login</button>
+        <button class="btn primary" type="submit">Login as Admin</button>
 
-        <p class="foot">Don't have an account? <a class="link" href="signup.html">Create one</a></p>
-        <p class="foot">Admin? <a class="link" href="admin-login.html">Admin login</a></p>
+        <p class="foot">Student account? <a class="link" href="login.html">Student login</a></p>
       </form>
     </section>
   </main>

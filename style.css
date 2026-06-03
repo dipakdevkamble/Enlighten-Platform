@@ -130,7 +130,7 @@ body {
 .hero-text h1 {
 
   font-family: "Manrope", "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  font-size: clamp(2.6rem, 3.4vw + 1rem, 4.1rem); /* responsive */
+  font-size: clamp(2.6rem, 3.4vw + 1rem, 4.1rem);
 
   font-weight: 900;
   line-height: 1.01;
