@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Enlighten gives engineering students notes, question papers, lecture links, account access, and class test results in one place.">
     <title>Enlighten</title>
 
     <link rel="stylesheet" href="style.css">
@@ -13,11 +14,10 @@
 
 <body>
 
-    <!-- NAVBAR -->
     <header class="site-header">
         <nav class="navbar">
-            <a href="#" class="logo">
-                <img id="logo-image" src="Assets/logo-img-1.1.webp" alt="logo-image">
+            <a href="index.html" class="logo" aria-label="Enlighten home">
+                <img id="logo-image" src="Assets/logo-img-1.1.webp" alt="Enlighten">
             </a>
 
             <ul class="nav-list">
@@ -44,7 +44,6 @@
 
     <main>
 
-        <!-- HERO -->
         <section class="hero">
             <div class="box-glass">
 
@@ -68,7 +67,6 @@
             </div>
         </section>
 
-        <!-- SECTION: CERTIFICATIONS INTRO -->
         <div class="section-intro">
             <h2 class="section2-h2">Earn Free Certifications That Add Real Value.</h2>
             <p class="section-subtext">
@@ -77,7 +75,6 @@
             </p>
         </div>
 
-        <!-- CERTIFICATION LOGOS -->
         <section class="certification-section">
             <div class="logos-slite">
                 <a href="https://www.tcsion.com/courses/career-edge-young-professional/" target="_blank" rel="noopener noreferrer">
@@ -92,7 +89,7 @@
                     <img id="microsoft-img" src="Assets/microsoft-logo-cropped-ultrahd.webp" alt="Microsoft certification" class="brand-img" loading="lazy">
                 </a>
 
-                <a id="IBM-img" href="https://skillsbuild.org/college-students" target="_blank" rel="noopener noreferrer">
+                <a href="https://skillsbuild.org/college-students" target="_blank" rel="noopener noreferrer">
                     <img id="ibm-img" src="Assets/ibm-logo-cropped-ultrahd.webp" alt="IBM Certification" class="brand-img" loading="lazy">
                 </a>
 
@@ -102,7 +99,6 @@
             </div>
         </section>
 
-        <!-- SECTION: NOTES INTRO -->
         <div class="section-intro">
             <h2 class="section2-h2">Teachers-Approved Notes That Help You Learn Better and Score Higher</h2>
             <p class="section-subtext">
@@ -111,18 +107,12 @@
             </p>
         </div>
 
-        <!-- NOTES FEATURE -->
         <section class="Notes-section">
-            <div class="left-text">
-                <h4></h4>
-            </div>
-
             <div class="right-cards">
                 <div class="card FE-bee">
                     <img src="Assets/BEE-background-img-v.webp" alt="BEE notes preview" loading="lazy">
                     <div class="card-content">
                         <h3>BEE Notes</h3>
-                        <p></p>
                         <a href="Notes.html" class="btn-link">Get Notes</a>
                     </div>
                 </div>
@@ -131,7 +121,6 @@
                     <img src="Assets/MATH-background-img-vv.webp" alt="Mathematics notes preview" loading="lazy">
                     <div class="card-content">
                         <h3>MATH Notes</h3>
-                        <p></p>
                         <a href="Notes.html" class="btn-link">Get Notes</a>
                     </div>
                 </div>
@@ -140,7 +129,6 @@
                     <img src="Assets/MECH-background-img-vv.webp" alt="Mechanics notes preview" loading="lazy">
                     <div class="card-content">
                         <h3>MECHANICS Notes</h3>
-                        <p></p>
                         <a href="Notes.html" class="btn-link">Get Notes</a>
                     </div>
                 </div>
@@ -149,7 +137,6 @@
                     <img src="Assets/PHY-background-img-v.webp" alt="Physics notes preview" loading="lazy">
                     <div class="card-content">
                         <h3>PHYSICS Notes</h3>
-                        <p></p>
                         <a href="Notes.html" class="btn-link">Get Notes</a>
                     </div>
                 </div>
@@ -160,7 +147,6 @@
             <h3 id="notes-left-h">Exam-Ready Notes for FE Subjects</h3>
         </section>
 
-        <!-- SECTION: PAPERS INTRO -->
         <div class="section-intro">
             <h2 class="section2-h2">Previous Year Question Papers That Help You Practice Better and Score Higher</h2>
             <p class="section-subtext">
@@ -169,7 +155,6 @@
             </p>
         </div>
 
-        <!-- PAPERS FEATURE -->
         <section class="Qpapers-section">
             <div class="left-img-papers">
                 <img src="Assets/papers-mod-img-vvv.webp" alt="Student with question papers" loading="lazy">
@@ -179,7 +164,6 @@
                 <img src="Assets/question_card_4k.webp" alt="Question paper card" loading="lazy">
                 <div class="card-content">
                     <h3>FE QPapers</h3>
-                    <p></p>
                     <a href="Papers.html" class="btn-link">Get QPapers</a>
                 </div>
             </div>
@@ -188,7 +172,6 @@
                 <img src="Assets/question_card_4k.webp" alt="Question paper card" loading="lazy">
                 <div class="card-content">
                     <h3>CS QPapers</h3>
-                    <p></p>
                     <a href="Papers.html" class="btn-link">Get QPapers</a>
                 </div>
             </div>
@@ -197,7 +180,6 @@
                 <img src="Assets/question_card_4k.webp" alt="Question paper card" loading="lazy">
                 <div class="card-content">
                     <h3>AIDS QPapers</h3>
-                    <p></p>
                     <a href="Papers.html" class="btn-link">Get QPapers</a>
                 </div>
             </div>
@@ -261,6 +243,7 @@
     </footer>
 
     <script src="config.js"></script>
+    <script src="api.js"></script>
     <script src="app.js" defer></script>
 </body>
 </html>

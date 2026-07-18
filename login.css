@@ -1,4 +1,4 @@
-﻿:root{
+:root{
   --bg1:#f6f8ff;
   --bg2:#eef2ff;
   --card:#ffffff;
@@ -23,7 +23,6 @@ body{
   color:var(--text);
   min-height:100vh;
 
-  /* Background image */
   background: url("Assets/loginBackground1.webp") center 0.1px / cover no-repeat fixed;
   position: relative;
 }
@@ -107,7 +106,7 @@ body::before{
   font-weight: 600;
 }
 
-/* Form */
+
 .auth-form{
   margin-top: 10px;
   display:grid;
@@ -153,26 +152,11 @@ body::before{
 
 .row{
   display:flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items:center;
   gap:12px;
 }
 
-.check{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight: 700;
-  color: rgba(15,23,42,.85);
-}
-
-.check input{
-  width: 16px;
-  height: 16px;
-  accent-color: var(--blue);
-}
-
-/* Links */
 .link{
   color: var(--blue);
   text-decoration:none;
@@ -232,7 +216,7 @@ body::before{
 
 .btn.primary:active{ transform: translateY(0); }
 
-/* Footer text */
+
 .foot{
   margin: 6px 0 0;
   color: rgba(15,23,42,.85);
@@ -252,7 +236,7 @@ body::before{
   }
 }
 
-/* Mobile */
+
 @media (max-width: 520px){
   body{
     padding-right: 0;          

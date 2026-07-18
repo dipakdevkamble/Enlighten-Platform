@@ -3,462 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Search published Enlighten class test results securely after login." />
   <title>Class Test Result | Enlighten</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-  <style>
-    :root {
-      --bg: #f6f8fc;
-      --panel: #ffffff;
-      --panel-soft: #f8fafc;
-      --text: #0f172a;
-      --muted: #64748b;
-      --border: #dbe3ef;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --success: #166534;
-      --success-bg: #ecfdf3;
-      --danger: #991b1b;
-      --danger-bg: #fef2f2;
-      --warning: #92400e;
-      --warning-bg: #fffbeb;
-      --shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      background: var(--bg);
-      font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      min-height: 68px;
-      padding: 0 7vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      border-bottom: 1px solid rgba(219, 227, 239, 0.9);
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(14px);
-    }
-
-    .brand {
-      color: var(--primary-dark);
-      font-weight: 900;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .topbar nav {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .topbar nav a,
-    .nav-button {
-      color: #334155;
-      border: 0;
-      background: transparent;
-      text-decoration: none;
-      font: inherit;
-      font-size: 0.94rem;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .nav-button {
-      padding: 0;
-    }
-
-    .topbar nav a[aria-current="page"] {
-      color: var(--primary-dark);
-    }
-
-    .result-shell {
-      width: min(1180px, 92%);
-      margin: 32px auto 56px;
-      display: grid;
-      gap: 20px;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--primary);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      margin-bottom: 0;
-      max-width: 780px;
-      font-size: clamp(1.85rem, 3vw, 3rem);
-      line-height: 1.12;
-    }
-
-    h2 {
-      margin-bottom: 4px;
-      font-size: 1.2rem;
-      line-height: 1.2;
-    }
-
-    .workspace {
-      display: grid;
-      grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    .panel {
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-    }
-
-    .lookup-form {
-      display: grid;
-      gap: 13px;
-    }
-
-    .field {
-      display: grid;
-      gap: 7px;
-    }
-
-    label {
-      color: #334155;
-      font-size: 0.82rem;
-      font-weight: 900;
-    }
-
-    input {
-      width: 100%;
-      min-height: 44px;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-      font-size: 0.94rem;
-    }
-
-    input:focus {
-      border-color: rgba(37, 99, 235, 0.65);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-      outline: none;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
-    button {
-      min-height: 42px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #fff;
-      color: #334155;
-      font: inherit;
-      font-weight: 900;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    button svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2.4;
-    }
-
-    .primary {
-      border-color: var(--primary);
-      color: #fff;
-      background: var(--primary);
-    }
-
-    button:disabled {
-      cursor: wait;
-      opacity: 0.72;
-    }
-
-    .message {
-      min-height: 20px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.86rem;
-      font-weight: 800;
-      line-height: 1.45;
-    }
-
-    .message[data-type="success"] {
-      color: var(--success);
-    }
-
-    .message[data-type="error"] {
-      color: var(--danger);
-    }
-
-    .message[data-type="warning"] {
-      color: var(--warning);
-    }
-
-    .result-panel {
-      min-height: 420px;
-      display: grid;
-      gap: 18px;
-      align-content: start;
-    }
-
-    .result-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .status-pill {
-      min-height: 32px;
-      padding: 7px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--panel-soft);
-      color: #475569;
-      font-size: 0.78rem;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .status-pill[data-type="success"] {
-      border-color: rgba(22, 101, 52, 0.25);
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .status-pill[data-type="error"] {
-      border-color: rgba(153, 27, 27, 0.25);
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .empty-state {
-      padding: 20px;
-      border: 1px dashed #cbd5e1;
-      border-radius: 8px;
-      background: var(--panel-soft);
-      color: var(--muted);
-      font-weight: 800;
-      line-height: 1.5;
-    }
-
-    .result-sheet {
-      display: none;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .result-sheet.is-visible {
-      display: block;
-    }
-
-    .student-band {
-      padding: 18px;
-      background: #0f172a;
-      color: #fff;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .student-band span {
-      display: block;
-      color: #cbd5e1;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .student-band strong {
-      display: block;
-      margin-top: 4px;
-      font-size: clamp(1.25rem, 2vw, 1.7rem);
-      line-height: 1.15;
-    }
-
-    .marks-badge {
-      min-width: 110px;
-      padding: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      text-align: center;
-    }
-
-    .marks-badge span {
-      color: #bfdbfe;
-    }
-
-    .marks-badge strong {
-      margin-top: 3px;
-      font-size: clamp(1.45rem, 3vw, 2.2rem);
-    }
-
-    .result-details {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      border-top: 1px solid var(--border);
-    }
-
-    .detail-row {
-      min-height: 76px;
-      padding: 14px 16px;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail-row:nth-child(2n) {
-      border-right: 0;
-    }
-
-    .detail-row span {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .detail-row strong {
-      color: var(--text);
-      font-size: 1rem;
-      line-height: 1.35;
-      overflow-wrap: anywhere;
-    }
-
-    .result-note {
-      margin: 0;
-      padding: 14px 16px;
-      color: var(--muted);
-      background: var(--panel-soft);
-      font-size: 0.84rem;
-      font-weight: 800;
-      line-height: 1.45;
-    }
-
-    @media (max-width: 900px) {
-      .topbar,
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        padding: 16px 5vw;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-    }
-
-    @media (max-width: 560px) {
-      .result-shell {
-        width: min(100% - 24px, 1180px);
-        margin-top: 18px;
-      }
-
-      .panel,
-      .panel {
-        padding: 16px;
-      }
-
-      .split,
-      .result-details,
-      .student-band {
-        grid-template-columns: 1fr;
-      }
-
-      .detail-row {
-        border-right: 0;
-      }
-
-      .marks-badge {
-        text-align: left;
-      }
-    }
-
-    @media print {
-      body {
-        background: #fff;
-      }
-
-      .topbar,
-      .lookup-panel,
-      .actions,
-      .message,
-      .empty-state {
-        display: none !important;
-      }
-
-      .result-shell {
-        width: 100%;
-        margin: 0;
-      }
-
-      .workspace {
-        display: block;
-      }
-
-      .result-panel {
-        box-shadow: none;
-        border: 0;
-      }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="result.css" />
 </head>
 <body>
   <header class="topbar">
@@ -475,10 +25,12 @@
   </header>
 
   <main class="result-shell">
-    <section class="workspace">
-      <section class="panel lookup-panel" aria-label="Result lookup">
+    <p class="page-alert" id="pageAlert" role="alert" hidden></p>
+
+    <div class="workspace">
+      <section class="panel lookup-panel" aria-labelledby="lookupHeading">
         <p class="eyebrow">Search</p>
-        <h2>Find Result</h2>
+        <h1 id="lookupHeading">Find Result</h1>
 
         <form class="lookup-form" id="resultForm" novalidate>
           <div class="field">
@@ -489,31 +41,41 @@
           <div class="split">
             <div class="field">
               <label for="roll">Roll No</label>
-              <input id="roll" name="roll" type="text" placeholder="21" required />
+              <input id="roll" name="roll" type="text" placeholder="21" autocomplete="off" required />
             </div>
 
             <div class="field">
               <label for="test">Test Name</label>
-              <input id="test" name="test" type="text" list="testOptions" placeholder="Class Test 1" required />
+              <input id="test" name="test" type="text" list="testOptions" placeholder="Class Test 1" autocomplete="off" required />
             </div>
           </div>
 
           <div class="field">
             <label for="subject">Subject</label>
-            <input id="subject" name="subject" list="subjectOptions" placeholder="Computer Graphics" required />
+            <input id="subject" name="subject" type="text" list="subjectOptions" placeholder="Computer Graphics" autocomplete="off" required />
           </div>
 
           <div class="actions">
-            <button class="primary" id="findButton" type="submit">
-              <i data-lucide="search"></i>
+            <button class="primary" id="findButton" type="submit" disabled>
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4"></path>
+              </svg>
               Search
             </button>
             <button id="resetButton" type="button">
-              <i data-lucide="rotate-ccw"></i>
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+                <path d="M3 4v6h6"></path>
+              </svg>
               Reset
             </button>
             <button id="printButton" type="button">
-              <i data-lucide="printer"></i>
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M6 9V3h12v6"></path>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <path d="M6 14h12v7H6z"></path>
+              </svg>
               Print
             </button>
           </div>
@@ -522,18 +84,18 @@
         </form>
       </section>
 
-      <section class="panel result-panel" aria-label="Result summary">
+      <section class="panel result-panel" aria-labelledby="resultHeading">
         <div class="result-top">
           <div>
             <p class="eyebrow">Summary</p>
-            <h2>Result Details</h2>
+            <h2 id="resultHeading">Result Details</h2>
           </div>
-          <div class="status-pill" id="resultStatus">Not searched</div>
+          <div class="status-pill" id="resultStatus" role="status" aria-live="polite">Not searched</div>
         </div>
 
         <div class="empty-state" id="emptyState">No result loaded.</div>
 
-        <div class="result-sheet" id="resultSheet">
+        <div class="result-sheet" id="resultSheet" hidden>
           <div class="student-band">
             <div>
               <span>Student</span>
@@ -567,7 +129,7 @@
           <p class="result-note" id="resultNote"></p>
         </div>
       </section>
-    </section>
+    </div>
   </main>
 
   <datalist id="subjectOptions">
@@ -581,196 +143,22 @@
     <option value="Engineering Physics"></option>
     <option value="Systems in Mechanical Engineering"></option>
     <option value="Computer Graphics"></option>
-    <option value="Data Structures & Algorithms"></option>
+    <option value="Data Structures &amp; Algorithms"></option>
     <option value="Database Management System"></option>
-    <option value="Digital Electronics & Logic Design"></option>
+    <option value="Digital Electronics &amp; Logic Design"></option>
     <option value="Discrete Mathematics"></option>
     <option value="Engineering Mathematics III"></option>
     <option value="Object Oriented Programming"></option>
     <option value="Operating Systems"></option>
     <option value="Principles of Communication Systems"></option>
-    <option value="Signals & Systems"></option>
+    <option value="Signals &amp; Systems"></option>
     <option value="Software Engineering"></option>
     <option value="Statistics"></option>
   </datalist>
   <datalist id="testOptions"></datalist>
 
   <script src="config.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.lucide?.createIcons) {
-        window.lucide.createIcons();
-      }
-
-      const API_BASE =
-        window.ENLIGHTEN_API_BASE ||
-        (window.location.protocol === "file:" ||
-        (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
-        (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
-          ? "http://localhost:3000"
-          : "");
-
-      const form = document.getElementById("resultForm");
-      const formMessage = document.getElementById("formMessage");
-      const findButton = document.getElementById("findButton");
-      const resetButton = document.getElementById("resetButton");
-      const printButton = document.getElementById("printButton");
-      const logoutButton = document.getElementById("logoutButton");
-      const resultStatus = document.getElementById("resultStatus");
-      const emptyState = document.getElementById("emptyState");
-      const resultSheet = document.getElementById("resultSheet");
-      const resultNote = document.getElementById("resultNote");
-      const subjectOptions = document.getElementById("subjectOptions");
-      const testOptions = document.getElementById("testOptions");
-
-      const output = {
-        name: document.getElementById("outName"),
-        roll: document.getElementById("outRoll"),
-        subject: document.getElementById("outSubject"),
-        test: document.getElementById("outTest"),
-        marks: document.getElementById("outMarks"),
-        status: document.getElementById("outStatus"),
-      };
-
-      function setMessage(text, type = "info") {
-        formMessage.textContent = text;
-        formMessage.dataset.type = type;
-      }
-
-      function setStatus(text, type = "") {
-        resultStatus.textContent = text;
-        if (type) {
-          resultStatus.dataset.type = type;
-        } else {
-          delete resultStatus.dataset.type;
-        }
-      }
-
-      function showEmpty(text = "No result loaded.") {
-        emptyState.textContent = text;
-        emptyState.hidden = false;
-        resultSheet.classList.remove("is-visible");
-        setStatus("Not searched");
-      }
-
-      function showResult(result) {
-        output.name.textContent = result.name || "-";
-        output.roll.textContent = result.rollNo || "-";
-        output.subject.textContent = result.subject || "-";
-        output.test.textContent = result.test || "-";
-        output.marks.textContent = result.marks || "-";
-        output.status.textContent = "Published";
-
-        const now = new Date();
-        resultNote.textContent = `Viewed on ${now.toLocaleDateString()} at ${now.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}.`;
-
-        emptyState.hidden = true;
-        resultSheet.classList.add("is-visible");
-        setStatus("Result found", "success");
-      }
-
-      async function parseResponse(response) {
-        const body = await response.json().catch(() => ({}));
-        if (!response.ok) {
-          throw new Error(body.message || "Request failed.");
-        }
-        return body;
-      }
-
-      async function loadStudentSession() {
-        try {
-          const response = await fetch(`${API_BASE}/api/auth/me`, { credentials: "include" });
-          await parseResponse(response);
-        } catch {
-          window.location.href = "login.html";
-        }
-      }
-
-      function addOptions(datalist, values) {
-        const existing = new Set(
-          Array.from(datalist.querySelectorAll("option")).map((option) => option.value.toLowerCase())
-        );
-
-        values.forEach((value) => {
-          const cleanValue = String(value || "").trim();
-          if (!cleanValue || existing.has(cleanValue.toLowerCase())) return;
-
-          const option = document.createElement("option");
-          option.value = cleanValue;
-          datalist.append(option);
-          existing.add(cleanValue.toLowerCase());
-        });
-      }
-
-      async function loadResultOptions() {
-        try {
-          const response = await fetch(`${API_BASE}/api/results/options`, { credentials: "include" });
-          const { subjects, tests } = await parseResponse(response);
-          addOptions(subjectOptions, subjects || []);
-          addOptions(testOptions, tests || []);
-        } catch {
-          addOptions(testOptions, ["Class Test 1", "Class Test 2"]);
-        }
-      }
-
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        const payload = Object.fromEntries(new FormData(form).entries());
-        findButton.disabled = true;
-        setMessage("Searching result...");
-        setStatus("Searching");
-
-        try {
-          const result = await fetch(`${API_BASE}/api/results`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(payload),
-          }).then(parseResponse);
-
-          showResult(result);
-          setMessage("Result loaded.", "success");
-        } catch (err) {
-          showEmpty("Result not found.");
-          setStatus("Not found", "error");
-          setMessage(err.message, "error");
-        } finally {
-          findButton.disabled = false;
-        }
-      });
-
-      resetButton.addEventListener("click", () => {
-        form.reset();
-        setMessage("");
-        showEmpty();
-      });
-
-      printButton.addEventListener("click", () => {
-        if (!resultSheet.classList.contains("is-visible")) {
-          setMessage("Search a result before printing.", "warning");
-          return;
-        }
-        window.print();
-      });
-
-      logoutButton.addEventListener("click", async () => {
-        await fetch(`${API_BASE}/api/auth/logout`, { method: "POST", credentials: "include" });
-        window.location.href = "login.html";
-      });
-
-      showEmpty();
-      loadStudentSession();
-      loadResultOptions();
-    });
-  </script>
+  <script src="api.js"></script>
+  <script src="result.js"></script>
 </body>
 </html>

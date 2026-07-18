@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Admin dashboard for uploading Enlighten notes, papers, and class test results." />
   <title>Admin | Enlighten</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,36 +82,73 @@
           <h2>Add Question Paper</h2>
         </div>
 
-        <label for="paperTitle">Paper Title</label>
-        <input id="paperTitle" name="title" placeholder="BXE May/June 2026" required />
+        <label for="paperDepartment">Department</label>
+        <select
+          id="paperDepartment"
+          name="department"
+          aria-describedby="paperDepartmentHelp"
+          required
+        >
+          <option value="">Select a department</option>
+          <option value="fy">First Year</option>
+          <option value="ce">SE: Computer Engineering</option>
+          <option value="it">SE: IT Engineering</option>
+          <option value="adis">SE: AIDS Engineering</option>
+          <option value="etc">SE: E &amp; TC Engineering</option>
+          <option value="civil">SE: Civil Engineering</option>
+        </select>
+        <p id="paperDepartmentHelp" class="field-help">
+          The paper will appear under this department in PaperArchive.
+        </p>
 
-        <label for="paperSubject">Subject</label>
-        <input id="paperSubject" name="subject" list="subjectOptions" placeholder="Basic Electronics Engineering" required />
+        <label for="paperSubject">Subject Name</label>
+        <input
+          id="paperSubject"
+          name="subject"
+          list="subjectOptions"
+          placeholder="Basic Electronics Engineering"
+          autocomplete="off"
+          maxlength="120"
+          required
+        />
 
-        <div class="split">
-          <div>
-            <label for="paperBranch">Branch</label>
-            <input id="paperBranch" name="branch" placeholder="First Year" />
-          </div>
-          <div>
-            <label for="paperYear">Academic Year</label>
-            <input id="paperYear" name="academicYear" placeholder="2026" />
-          </div>
-        </div>
-
-        <div class="split">
-          <div>
-            <label for="paperSemester">Semester</label>
-            <input id="paperSemester" name="semester" placeholder="Sem 1" />
-          </div>
-          <div>
-            <label for="paperSession">Exam Session</label>
-            <input id="paperSession" name="examSession" placeholder="May/June" />
-          </div>
-        </div>
+        <label for="paperTitle">Visible PDF Name</label>
+        <input
+          id="paperTitle"
+          name="title"
+          placeholder="May_Jun_2026.pdf"
+          aria-describedby="paperTitleHelp"
+          maxlength="180"
+          required
+        />
+        <p id="paperTitleHelp" class="field-help">
+          This name is shown to students. Selecting a file fills it automatically when empty.
+        </p>
 
         <label for="paperPdf">PDF File</label>
-        <input id="paperPdf" name="pdf" type="file" accept="application/pdf" required />
+        <input
+          id="paperPdf"
+          name="pdf"
+          type="file"
+          accept="application/pdf,.pdf"
+          aria-describedby="paperPdfHelp"
+          required
+        />
+        <p id="paperPdfHelp" class="field-help">Upload one PDF question paper.</p>
+
+        <div class="split">
+          <div>
+            <label for="paperYear">Academic Year (optional)</label>
+            <input id="paperYear" name="academicYear" placeholder="2026" inputmode="numeric" maxlength="40" />
+          </div>
+          <div>
+            <label for="paperSemester">Semester (optional)</label>
+            <input id="paperSemester" name="semester" placeholder="Sem 1" maxlength="40" />
+          </div>
+        </div>
+
+        <label for="paperSession">Exam Session (optional)</label>
+        <input id="paperSession" name="examSession" placeholder="May/June" maxlength="80" />
 
         <button class="primary" type="submit">Upload Paper</button>
         <p id="paperMessage" class="message" role="status" aria-live="polite"></p>
@@ -125,6 +163,9 @@
         <label for="studentName">Student Name</label>
         <input id="studentName" name="studentName" placeholder="Student full name" required />
 
+        <label for="studentEmail">Student Email</label>
+        <input id="studentEmail" name="studentEmail" type="email" placeholder="student@example.com" required />
+
         <label for="rollNo">Roll No</label>
         <input id="rollNo" name="rollNo" placeholder="21" required />
 
@@ -134,8 +175,16 @@
         <label for="testName">Test Name</label>
         <input id="testName" name="testName" placeholder="Class Test 1" required />
 
-        <label for="marks">Marks</label>
-        <input id="marks" name="marks" placeholder="18 / 20" required />
+        <div class="split">
+          <div>
+            <label for="marksObtained">Marks Obtained</label>
+            <input id="marksObtained" name="marksObtained" type="number" min="0" step="0.01" placeholder="18" required />
+          </div>
+          <div>
+            <label for="marksTotal">Total Marks</label>
+            <input id="marksTotal" name="marksTotal" type="number" min="1" step="0.01" placeholder="20" required />
+          </div>
+        </div>
 
         <button class="primary" type="submit">Add Result</button>
         <p id="resultMessage" class="message" role="status" aria-live="polite"></p>
@@ -164,7 +213,7 @@
           <p class="eyebrow">Private Data</p>
           <h2>Recent Results</h2>
         </div>
-        <div id="resultsList" class="list-state">Enter admin key to load results.</div>
+        <div id="resultsList" class="list-state">Loading results...</div>
       </section>
     </section>
   </main>
@@ -194,6 +243,7 @@
   </datalist>
 
   <script src="config.js"></script>
+  <script src="api.js"></script>
   <script src="admin.js" defer></script>
 </body>
 </html>

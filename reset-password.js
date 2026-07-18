@@ -1,13 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE =
-    window.ENLIGHTEN_API_BASE ||
-    (window.location.protocol === "file:" ||
-    (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
-    (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
-      ? "http://localhost:3000"
-      : "");
+  "use strict";
 
   const form = document.getElementById("resetPasswordForm");
+  if (!form) return;
+
+  const API = window.EnlightenApi;
   const message = form.querySelector(".form-message");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
@@ -17,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
   const code = params.get("code") || hashParams.get("code") || "";
   const accessToken = hashParams.get("access_token") || "";
+
+  if (!message || !password || !confirmPassword || !submitButton) return;
+
+  if ((code || accessToken) && window.history?.replaceState) {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
 
   function setMessage(text, type = "info") {
     message.textContent = text;
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!code && !accessToken) {
     setMessage("Open this page from the password recovery email link.", "error");
+    submitButton.disabled = true;
   }
 
   password.addEventListener("input", validatePasswordsMatch);
@@ -51,7 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setMessage("Updating password...");
 
     try {
-      const response = await fetch(`${API_BASE}/api/auth/reset-password`, {
+      if (!API) {
+        throw new Error("Site configuration failed. Refresh the page and try again.");
+      }
+      const body = await API.fetchJson("/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -60,19 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
           code,
           accessToken,
         }),
+        fallbackMessage: "Could not update password.",
       });
-
-      const body = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(body.message || "Could not update password.");
-      }
 
       setMessage(body.message || "Password updated.", "success");
       window.setTimeout(() => {
-        window.location.href = body.redirectUrl || "/login.html";
+        window.location.href = API.safeLocalUrl(body.redirectUrl, "login.html");
       }, 900);
     } catch (err) {
-      setMessage(err.message, "error");
+      setMessage(err instanceof Error ? err.message : "Could not update password.", "error");
     } finally {
       submitButton.disabled = false;
     }

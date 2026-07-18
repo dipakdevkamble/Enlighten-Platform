@@ -10,7 +10,7 @@
   width: 100vw;
 }
 
-/* Main Sidebar Container */
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -40,7 +40,7 @@
   border-radius: 10px;
 }
 
-/* Dashboard Heading */
+
 .sidebar-header h2 {
   font-size: 1.4rem;
   color: #f8fafc;
@@ -50,7 +50,7 @@
   letter-spacing: -0.5px;
 }
 
-/* Year Names (Headlines) */
+
 .sidebar-section h3 {
   font-size: 0.85rem;
   color: #94a3b8; 
@@ -68,7 +68,7 @@
   color: #f8fafc; 
 }
 
-/* Accordion Logic */
+
 .sidebar-section ul {
   list-style: none;
   padding-left: 0; 
@@ -90,7 +90,7 @@
   color: #38bdf8;
 }
 
-/* Sidebar List Items */
+
 .sidebar-section li {
   margin-bottom: 5px;
   border-radius: 8px;
@@ -107,7 +107,7 @@
   transition: inherit;
 }
 
-/* Interaction Effects */
+
 .sidebar-section li:hover {
   background-color: rgba(255, 255, 255, 0.05); 
   padding-left: 8px; 
@@ -117,7 +117,7 @@
   color: #38bdf8;
 }
 
-/* Active State */
+
 .sidebar-section li.active {
   background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
@@ -128,9 +128,9 @@
   font-weight: 600;
 }
 
-/* Main Content Styling */
+
 .main-content {
-  margin-left: 270px; 
+  margin-left: 270px;
   flex-grow: 1;
   padding: 40px;
   overflow-y: auto;
@@ -268,7 +268,7 @@ hr {
   border-radius: 50px;
 }
 
-/* Grid Layout */
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -276,7 +276,7 @@ hr {
   gap: 20px;
 }
 
-/* Card Design */
+
 .card {
   background: #fff;
   border: 1.5px solid #eee;
@@ -294,7 +294,7 @@ hr {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Card Image Area (Placeholder) */
+
 .card-img {
   height: 130px;
   display: flex;
@@ -306,7 +306,7 @@ hr {
   font-weight: bold;
 }
 
-/* Card Bottom Info Area */
+
 .card-info {
   padding: 15px;
   font-size: 18px;
@@ -321,7 +321,7 @@ hr {
   margin-top: 5px;
 }
 
-/* Color Themes */
+
 .theme-blue { 
   border-color: #b3d7ff; 
 }
@@ -350,7 +350,7 @@ hr {
   background-color: #fff3e0;
  }
 
-/* --- SE Computer Themes (Teal/Cool tones) --- */
+
 .theme-teal { 
   border-color: #4db6ac; 
 }
@@ -365,7 +365,7 @@ hr {
   background-color: #e8eaf6; 
 }
 
-/* --- SE IT Themes (Amber/Warm tones) --- */
+
 .theme-amber { 
   border-color: #ffb300; 
 }
@@ -380,7 +380,7 @@ hr {
   background-color: #fce4ec;
  }
 
-/* --- SE AIDS Themes  --- */
+
 .theme-slate { 
   border-color: #90a4ae; 
 }
@@ -388,8 +388,8 @@ hr {
    background-color: #eceff1;
    }
 
-/* responsive */
-/* --- Mobile Phone Optimization --- */
+
+
 @media (max-width: 550px) {
  
   .dashboard-container {
@@ -398,15 +398,14 @@ hr {
     width: 100%;
   }
 
-  /* 2. Sidebar becomes a compact top-nav */
   .sidebar {
-    position: static; 
+    position: static;
     width: 100%;
     height: auto;
     padding: 15px;
     border-right: none;
     border-bottom: 2px solid #eee;
-    background: #fff; 
+    background: #fff;
     color: #111827;
     box-shadow: none;
   }
@@ -419,7 +418,6 @@ hr {
     border-bottom: 2px solid #38bdf8;
   }
 
-  /* Lists horizontal and scrollable */
   .sidebar-section ul {
     display: flex;
     overflow-x: auto;
@@ -430,7 +428,7 @@ hr {
 
   .sidebar-section li {
     margin-bottom: 0;
-    padding-left: 0; 
+    padding-left: 0;
     background: #f1f1f1;
     border-radius: 20px;
   }
@@ -445,14 +443,13 @@ hr {
     color: #111827;
   }
 
-  /* 3. Main Content adjustments */
   .main-content {
-    margin-left: 0; 
+    margin-left: 0;
     padding: 20px 15px;
   }
 
-  .main-content h1 { 
-    font-size: 20px; 
+  .main-content h1 {
+    font-size: 20px;
     text-align: center;
    }
 

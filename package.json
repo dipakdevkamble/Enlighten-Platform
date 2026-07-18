@@ -4,16 +4,30 @@
   "private": true,
   "description": "Static Enlighten student resource site with a small local Node API for auth and results.",
   "scripts": {
-    "start": "node server.js"
+    "build": "node scripts/build.js",
+    "check": "node scripts/validate-build.js",
+    "check:dist": "node scripts/validate-build.js --dist",
+    "smoke:dist": "node scripts/smoke-dist.js",
+    "test": "npm run check && node --test tests/server.test.js",
+    "audit:prod": "npm audit --omit=dev --audit-level=high",
+    "start": "node scripts/start.js",
+    "start:dev": "node scripts/start.js --dev"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
+    "compression": "1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "multer": "^2.1.1"
+    "express-rate-limit": "8.5.2",
+    "helmet": "8.3.0",
+    "multer": "^2.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1",
+    "html-minifier-terser": "7.2.0"
   }
 }

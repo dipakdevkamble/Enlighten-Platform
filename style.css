@@ -1,5 +1,5 @@
 
-/* Base */
+
 * { box-sizing: border-box; }
 
 body {
@@ -10,8 +10,6 @@ body {
 }
 
 
-   /* Header / Navbar */
-   
 .site-header{
 
   position: sticky;
@@ -97,8 +95,6 @@ body {
   transform: scale(0.97); 
 }
 
-   /* Hero */
-  
 .hero .box-glass {
 
   width: 85%;
@@ -211,19 +207,17 @@ body {
   justify-content: flex-end;
   align-items: flex-end;
   position: relative;
-  z-index: 2; /* above blur */
+  z-index: 2;
 }
 
 .hero-img img{
   height: 520px;
   width: auto;
 
-  
   margin: 0 30px -50px 0;
 
   position: relative;
 
-  /* prevent blur */
   filter: none;
   transform: none;
   image-rendering: auto;
@@ -281,8 +275,6 @@ body {
 }
 
 
-   /* Certifications */
-  
 .certification-section {
 
   width: 100%;
@@ -338,8 +330,6 @@ body {
 }
 
 
-   /* Notes feature section */
-   
 .Notes-section {
 
   width: 85%;
@@ -506,8 +496,6 @@ body {
   margin-left: 50px;
 }
 
-   /* Papers feature section */
-  
 .Qpapers-section {
 
   width: 85%;
@@ -586,8 +574,6 @@ body {
 }
 
 
-   /* Footer */
-   
 #last-line{
 
   background-color: rgba(221, 221, 221, 0.62);
@@ -709,7 +695,7 @@ body {
   color: #475569;
 }
 
-/* Responsive  */
+
   
 @media (max-width: 1024px) {
 

@@ -1,50 +1,34 @@
-
 document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
+
   const authAction = document.querySelector(".action.login, [data-auth-action]");
   if (!authAction) return;
 
-  const API_BASE =
-    window.ENLIGHTEN_API_BASE ||
-    (window.location.protocol === "file:" ||
-    (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
-    (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
-      ? "http://localhost:3000"
-      : "");
-  const APP_BASE = API_BASE || "";
-  const loginUrl = `${APP_BASE}/login.html`;
-
-  async function parseResponse(response) {
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error(body.message || "Request failed.");
-    }
-    return body;
-  }
+  const API = window.EnlightenApi;
+  const loginUrl = API?.safeLocalUrl("login.html", "login.html") || "login.html";
 
   async function logout() {
     authAction.setAttribute("aria-disabled", "true");
     authAction.textContent = "Logging out...";
 
-    try {
-      await fetch(`${API_BASE}/api/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-    } finally {
-      window.location.href = loginUrl;
-    }
+    await API?.fetchJson("/api/auth/logout", { method: "POST" }).catch(() => undefined);
+    window.location.href = loginUrl;
   }
 
   async function updateAuthAction() {
     try {
-      await fetch(`${API_BASE}/api/auth/me`, { credentials: "include" }).then(parseResponse);
+      if (!API) throw new Error("Site configuration failed.");
+      await API.fetchJson("/api/auth/me");
 
       authAction.textContent = "Logout";
-      authAction.href = "#";
+      authAction.href = loginUrl;
+      authAction.removeAttribute("aria-disabled");
       authAction.dataset.authState = "signed-in";
       authAction.addEventListener("click", (event) => {
         event.preventDefault();
-        logout();
+        if (authAction.getAttribute("aria-disabled") !== "true") {
+          void logout();
+        }
       });
     } catch {
       authAction.textContent = "Login";
@@ -53,5 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  updateAuthAction();
+  void updateAuthAction();
 });

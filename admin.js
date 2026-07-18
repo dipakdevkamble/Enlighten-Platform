@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE =
-    window.ENLIGHTEN_API_BASE ||
-    (window.location.protocol === "file:" ||
-    (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
-    (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
-      ? "http://localhost:3000"
-      : "");
+  "use strict";
+
+  const API = window.EnlightenApi;
 
   const adminStatus = document.getElementById("adminStatus");
   const adminIdentity = document.getElementById("adminIdentity");
@@ -19,209 +15,295 @@ document.addEventListener("DOMContentLoaded", () => {
   const notesList = document.getElementById("notesList");
   const papersList = document.getElementById("papersList");
   const resultsList = document.getElementById("resultsList");
+  const paperTitle = document.getElementById("paperTitle");
+  const paperPdf = document.getElementById("paperPdf");
+
+  const departmentLabels = Object.freeze({
+    fy: "First Year",
+    ce: "SE: Computer Engineering",
+    it: "SE: IT Engineering",
+    adis: "SE: AIDS Engineering",
+    etc: "SE: E & TC Engineering",
+    civil: "SE: Civil Engineering",
+  });
 
   function setMessage(element, text, type = "info") {
+    if (!element) return;
     element.textContent = text;
     element.dataset.type = type;
   }
 
-  function escapeHtml(value) {
-    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      "\"": "&quot;",
-      "'": "&#39;",
-    }[char]));
+  function errorMessage(error, fallback = "Request failed. Please try again.") {
+    return error instanceof Error ? error.message : fallback;
   }
 
-  function adminHeaders(extra = {}) {
-    return extra;
+  function appendText(parent, tagName, text) {
+    const element = document.createElement(tagName);
+    element.textContent = String(text ?? "");
+    parent.append(element);
   }
 
-  async function parseResponse(response) {
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error(body.message || "Request failed.");
+  function appendFileLink(parent, value) {
+    const fileUrl = API?.safeFileUrl(value);
+    if (!fileUrl) {
+      appendText(parent, "span", "File unavailable");
+      return;
     }
-    return body;
+
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open PDF";
+    parent.append(link);
+  }
+
+  function renderList(container, items, renderItem, emptyMessage) {
+    if (!Array.isArray(items) || items.length === 0) {
+      container.textContent = emptyMessage;
+      return;
+    }
+
+    const list = document.createElement("div");
+    list.className = "data-list";
+    items.forEach((item) => list.append(renderItem(item)));
+    container.replaceChildren(list);
+  }
+
+  function setFormsDisabled(disabled) {
+    [noteForm, paperForm, resultForm].forEach((form) => {
+      form?.querySelectorAll("input, select, textarea, button").forEach((control) => {
+        control.disabled = disabled;
+      });
+    });
+  }
+
+  function getDepartmentLabel(value) {
+    const normalized = String(value ?? "").trim();
+    if (!normalized) return "";
+    return departmentLabels[normalized.toLowerCase()] || normalized;
+  }
+
+  function redirectToLogin() {
+    window.location.replace(API?.safeLocalUrl("admin-login.html", "admin-login.html") || "admin-login.html");
   }
 
   async function loadPapers() {
+    if (!API || !papersList) return;
     try {
-      const response = await fetch(`${API_BASE}/api/papers`, { credentials: "include" });
-      const { papers } = await parseResponse(response);
-      if (!papers.length) {
-        papersList.textContent = "No uploaded papers yet.";
-        return;
-      }
-
-      papersList.innerHTML = `<div class="data-list">${papers
-        .map(
-          (paper) => `
-            <article class="data-item">
-              <strong>${escapeHtml(paper.title)}</strong>
-              <span>${escapeHtml(paper.subject)} ${paper.branch ? `- ${escapeHtml(paper.branch)}` : ""}</span>
-              <span>${escapeHtml(paper.exam_session || "")} ${escapeHtml(paper.academic_year || "")}</span>
-              <a href="${escapeHtml(paper.file_url)}" target="_blank" rel="noopener noreferrer">Open PDF</a>
-            </article>
-          `
-        )
-        .join("")}</div>`;
+      const { papers } = await API.fetchJson("/api/papers");
+      renderList(
+        papersList,
+        papers,
+        (paper) => {
+          const article = document.createElement("article");
+          const departmentLabel = getDepartmentLabel(
+            paper.department_key || paper.department || paper.branch
+          );
+          article.className = "data-item";
+          appendText(article, "strong", paper.title);
+          appendText(
+            article,
+            "span",
+            [paper.subject, departmentLabel && `- ${departmentLabel}`]
+              .filter(Boolean)
+              .join(" ")
+          );
+          appendText(
+            article,
+            "span",
+            [paper.exam_session, paper.academic_year].filter(Boolean).join(" ")
+          );
+          appendFileLink(article, paper.file_url);
+          return article;
+        },
+        "No uploaded papers yet."
+      );
     } catch (err) {
-      papersList.textContent = err.message;
+      papersList.textContent = errorMessage(err, "Could not load papers.");
     }
   }
 
   async function loadNotes() {
+    if (!API || !notesList) return;
     try {
-      const response = await fetch(`${API_BASE}/api/notes`, { credentials: "include" });
-      const { notes } = await parseResponse(response);
-      if (!notes.length) {
-        notesList.textContent = "No uploaded notes yet.";
-        return;
-      }
-
-      notesList.innerHTML = `<div class="data-list">${notes
-        .map(
-          (note) => `
-            <article class="data-item">
-              <strong>${escapeHtml(note.title)}</strong>
-              <span>${escapeHtml(note.subject)} ${note.branch ? `- ${escapeHtml(note.branch)}` : ""}</span>
-              <span>${escapeHtml(note.unit || "")} ${escapeHtml(note.semester || "")}</span>
-              <a href="${escapeHtml(note.file_url)}" target="_blank" rel="noopener noreferrer">Open PDF</a>
-            </article>
-          `
-        )
-        .join("")}</div>`;
+      const { notes } = await API.fetchJson("/api/notes");
+      renderList(
+        notesList,
+        notes,
+        (note) => {
+          const article = document.createElement("article");
+          article.className = "data-item";
+          appendText(article, "strong", note.title);
+          appendText(
+            article,
+            "span",
+            [note.subject, note.branch && `- ${note.branch}`].filter(Boolean).join(" ")
+          );
+          appendText(article, "span", [note.unit, note.semester].filter(Boolean).join(" "));
+          appendFileLink(article, note.file_url);
+          return article;
+        },
+        "No uploaded notes yet."
+      );
     } catch (err) {
-      notesList.textContent = err.message;
+      notesList.textContent = errorMessage(err, "Could not load notes.");
     }
   }
 
   async function loadResults() {
+    if (!API || !resultsList) return;
     try {
-      const response = await fetch(`${API_BASE}/api/admin/results`, {
-        headers: adminHeaders(),
-        credentials: "include",
-      });
-      const { results } = await parseResponse(response);
-      if (!results.length) {
-        resultsList.textContent = "No results added yet.";
-        return;
-      }
-
-      resultsList.innerHTML = `<div class="data-list">${results
-        .map(
-          (result) => `
-            <article class="data-item">
-              <strong>${escapeHtml(result.student_name)} (${escapeHtml(result.roll_no)})</strong>
-              <span>${escapeHtml(result.subject)} - ${escapeHtml(result.test_name)}</span>
-              <span>Marks: ${escapeHtml(result.marks)}</span>
-            </article>
-          `
-        )
-        .join("")}</div>`;
+      const { results } = await API.fetchJson("/api/admin/results");
+      renderList(
+        resultsList,
+        results,
+        (result) => {
+          const article = document.createElement("article");
+          article.className = "data-item";
+          appendText(
+            article,
+            "strong",
+            `${result.student_name || "Unknown student"} (${result.roll_no || "-"})`
+          );
+          appendText(article, "span", result.student_email || "No student email");
+          appendText(article, "span", `${result.subject || "-"} - ${result.test_name || "-"}`);
+          appendText(article, "span", `Marks: ${result.marks || "-"}`);
+          return article;
+        },
+        "No results added yet."
+      );
     } catch (err) {
-      resultsList.textContent = err.message;
+      resultsList.textContent = errorMessage(err, "Could not load results.");
     }
   }
 
   async function loadAdminSession() {
+    if (!API) {
+      setMessage(adminStatus, "Site configuration failed. Refresh the page.", "error");
+      if (adminIdentity) adminIdentity.textContent = "Admin tools unavailable.";
+      return false;
+    }
     try {
-      const response = await fetch(`${API_BASE}/api/auth/me`, { credentials: "include" });
-      const { user } = await parseResponse(response);
-      if (user.role !== "admin") {
-        window.location.href = "admin-login.html";
-        return;
+      const { user } = await API.fetchJson("/api/auth/me");
+      if (!user || user.role !== "admin") {
+        redirectToLogin();
+        return false;
       }
-      adminIdentity.textContent = `${user.name} (${user.email})`;
+      if (adminIdentity) adminIdentity.textContent = `${user.name} (${user.email})`;
       setMessage(adminStatus, "Admin session active.", "success");
-    } catch {
-      window.location.href = "admin-login.html";
+      return true;
+    } catch (error) {
+      if (error?.status === 401 || error?.status === 403) {
+        redirectToLogin();
+      } else {
+        if (adminIdentity) adminIdentity.textContent = "Could not verify admin session.";
+        setMessage(adminStatus, errorMessage(error, "Could not verify admin session."), "error");
+      }
+      return false;
     }
   }
 
   logoutButton?.addEventListener("click", async () => {
-    await fetch(`${API_BASE}/api/auth/logout`, { method: "POST", credentials: "include" });
-    window.location.href = "admin-login.html";
+    if (API) {
+      await API.fetchJson("/api/auth/logout", { method: "POST" }).catch(() => undefined);
+    }
+    redirectToLogin();
   });
 
-  noteForm.addEventListener("submit", async (event) => {
+  paperPdf?.addEventListener("change", () => {
+    const selectedFile = paperPdf.files?.[0];
+    if (paperTitle && !paperTitle.value.trim() && selectedFile?.name) {
+      paperTitle.value = selectedFile.name;
+    }
+  });
+
+  noteForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = noteForm.querySelector("button");
+    if (!API || !submit) {
+      setMessage(noteMessage, "Admin tools are unavailable. Refresh the page.", "error");
+      return;
+    }
     submit.disabled = true;
     setMessage(noteMessage, "Uploading notes...");
 
     try {
-      const response = await fetch(`${API_BASE}/api/admin/notes`, {
+      const body = await API.fetchJson("/api/admin/notes", {
         method: "POST",
-        headers: adminHeaders(),
-        credentials: "include",
         body: new FormData(noteForm),
+        fallbackMessage: "Could not upload notes.",
       });
-      const body = await parseResponse(response);
       setMessage(noteMessage, body.message || "Notes uploaded.", "success");
       noteForm.reset();
-      loadNotes();
+      void loadNotes();
     } catch (err) {
-      setMessage(noteMessage, err.message, "error");
+      setMessage(noteMessage, errorMessage(err, "Could not upload notes."), "error");
     } finally {
       submit.disabled = false;
     }
   });
 
-  paperForm.addEventListener("submit", async (event) => {
+  paperForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = paperForm.querySelector("button");
+    if (!API || !submit) {
+      setMessage(paperMessage, "Admin tools are unavailable. Refresh the page.", "error");
+      return;
+    }
     submit.disabled = true;
     setMessage(paperMessage, "Uploading paper...");
 
     try {
-      const response = await fetch(`${API_BASE}/api/admin/papers`, {
+      const body = await API.fetchJson("/api/admin/papers", {
         method: "POST",
-        headers: adminHeaders(),
-        credentials: "include",
         body: new FormData(paperForm),
+        fallbackMessage: "Could not upload paper.",
       });
-      const body = await parseResponse(response);
       setMessage(paperMessage, body.message || "Paper uploaded.", "success");
       paperForm.reset();
-      loadPapers();
+      void loadPapers();
     } catch (err) {
-      setMessage(paperMessage, err.message, "error");
+      setMessage(paperMessage, errorMessage(err, "Could not upload paper."), "error");
     } finally {
       submit.disabled = false;
     }
   });
 
-  resultForm.addEventListener("submit", async (event) => {
+  resultForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = resultForm.querySelector("button");
+    if (!API || !submit) {
+      setMessage(resultMessage, "Admin tools are unavailable. Refresh the page.", "error");
+      return;
+    }
     submit.disabled = true;
     setMessage(resultMessage, "Adding result...");
 
     const payload = Object.fromEntries(new FormData(resultForm).entries());
     try {
-      const response = await fetch(`${API_BASE}/api/admin/results`, {
+      const body = await API.fetchJson("/api/admin/results", {
         method: "POST",
-        headers: adminHeaders({ "Content-Type": "application/json" }),
-        credentials: "include",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const body = await parseResponse(response);
       setMessage(resultMessage, body.message || "Result added.", "success");
       resultForm.reset();
-      loadResults();
+      void loadResults();
     } catch (err) {
-      setMessage(resultMessage, err.message, "error");
+      setMessage(resultMessage, errorMessage(err, "Could not add result."), "error");
     } finally {
       submit.disabled = false;
     }
   });
 
-  loadAdminSession();
-  loadNotes();
-  loadPapers();
-  loadResults();
+  async function initializeAdmin() {
+    setFormsDisabled(true);
+    if (!(await loadAdminSession())) return;
+
+    setFormsDisabled(false);
+    await Promise.all([loadNotes(), loadPapers(), loadResults()]);
+  }
+
+  void initializeAdmin();
 });

@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse Enlighten engineering notes by year, branch, and subject.">
     <title>SE Computer Notes Library</title>
     <link rel="stylesheet" href="Notes.css">
 </head>
 <body>
 
 <div class="dashboard-container">
-    <!-- Left Column: Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <h2>My Study Notes</h2>
         </div>
 
-        <!-- This section starts VISIBLE because of the 'open' class -->
         <div class="sidebar-section open">
         <h3>First Year Notes</h3>
         <ul>
@@ -31,7 +30,6 @@
         </ul>
         </div>
 
-        <!-- This section starts HIDDEN -->
         <div class="sidebar-section">
         <h3>SE Computer Notes</h3>
         <ul>
@@ -99,7 +97,6 @@
 
     </aside>
 
-    <!-- Right Column: Main Content -->
     <main class="main-content">
         <header>
             <h1>My Notes Library</h1>
@@ -118,7 +115,6 @@
             <div id="subjectNotesBody" class="subject-notes-body"></div>
         </section>
 
-        <!-- FE Section -->
         <section id="fe-notes" class="notes-section">
             <h3>FE Notes Library</h3>
             <div class="notes-grid">
@@ -173,7 +169,6 @@
 
         <hr>
 
-        <!-- SE Computer Section -->
         <section id="se-comp-notes" class="notes-section">
             <h3>SE Computer Notes Library</h3>
             <div class="notes-grid">
@@ -228,7 +223,6 @@
 
         <hr>
 
-        <!-- SE IT Section -->
         <section id="se-it-notes" class="notes-section">
             <h3>SE IT Notes Library</h3>
             <div class="notes-grid">
@@ -288,7 +282,6 @@
 
         <hr>
 
-        <!-- SE AIDS Section -->
         <section id="se-aids-notes" class="notes-section">
             <h3>SE AIDS Notes Library</h3>
             <div class="notes-grid">
@@ -347,7 +340,6 @@
         </section>
         <hr>
 
-        <!-- SE ENTC Section -->
         <section id="se-entc-notes" class="notes-section">
             <h3>SE ENTC Notes Library</h3>
             <div class="notes-grid">
@@ -408,6 +400,7 @@
     </main>
 </div>
 <script src="config.js"></script>
+<script src="api.js"></script>
 <script src="Notes.js"></script>
 </body>
 </html>

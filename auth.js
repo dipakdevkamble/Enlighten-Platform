@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.lucide?.createIcons) {
-    window.lucide.createIcons();
-  }
+  "use strict";
 
   const form = document.querySelector("[data-auth-form]");
   if (!form) return;
@@ -11,13 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const password = form.querySelector("#password");
   const confirmPassword = form.querySelector("#confirmPassword");
   const submitButton = form.querySelector('button[type="submit"]');
-  const API_BASE =
-    window.ENLIGHTEN_API_BASE ||
-    (window.location.protocol === "file:" ||
-    (window.location.hostname === "localhost" && window.location.port && window.location.port !== "3000") ||
-    (window.location.hostname === "127.0.0.1" && window.location.port && window.location.port !== "3000")
-      ? "http://localhost:3000"
-      : "");
+  const API = window.EnlightenApi;
 
   function setMessage(text, type = "info") {
     if (!message) return;
@@ -41,20 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function postJson(url, payload) {
-    const response = await fetch(`${API_BASE}${url}`, {
+    if (!API) {
+      throw new Error("Site configuration failed. Refresh the page and try again.");
+    }
+    return API.fetchJson(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify(payload),
+      fallbackMessage: "Request failed. Please try again.",
     });
-
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const error = new Error(body.message || "Request failed. Please try again.");
-      error.fromApi = true;
-      throw error;
-    }
-    return body;
   }
 
   password?.addEventListener("input", validatePasswordsMatch);
@@ -77,7 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const endpoint = endpointByMode[mode];
-    if (!endpoint) return;
+    if (!endpoint) {
+      setMessage("This form is not configured correctly. Refresh the page and try again.", "error");
+      return;
+    }
 
     submitButton?.setAttribute("disabled", "true");
     setMessage("Working...", "info");
@@ -91,16 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (result.redirectUrl) {
         window.setTimeout(() => {
-          window.location.href = result.redirectUrl;
+          window.location.href = API.safeLocalUrl(result.redirectUrl, "index.html");
         }, 600);
       }
     } catch (err) {
-      setMessage(
-        err.fromApi
-          ? err.message
-          : `${err.message} Open the site at http://localhost:3000 or run the local backend with npm start.`,
-        "error"
-      );
+      setMessage(err instanceof Error ? err.message : "Request failed. Please try again.", "error");
     } finally {
       submitButton?.removeAttribute("disabled");
     }
